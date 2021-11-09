@@ -1,4 +1,4 @@
-const { db, models: {User} } = require('../server/db');
+const { db, models: {User} } = require('./server/db');
 
 const users = [
   {
@@ -38,7 +38,6 @@ const users = [
     lastName: 'Flores',
     email: 'claudiaflores@stardewvalley.com',
     password: '12345',
-    avatar: '',
     isAdmin: true,
   },
   {
@@ -46,7 +45,6 @@ const users = [
     lastName: 'Roble',
     email: 'emilyroble@stardewvalley.com',
     password: '12345',
-    avatar: '',
     isAdmin: true,
   },
   {
@@ -54,15 +52,13 @@ const users = [
     lastName: 'Patel',
     email: 'anshupatel@stardewvalley.com',
     password: '12345',
-    avatar: '',
     isAdmin: true,
   },
   {
     firstName: 'Zoey',
     lastName: 'Zhang',
     email: 'zoeyzhang@stardewvalley.com',
-    password: '123',
-    avatar: '',
+    password: '12345',
     isAdmin: true,
   },
 ];
