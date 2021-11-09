@@ -1,4 +1,4 @@
-const { db, Product, User } = require('./server/db');
+const { db, models: {User} } = require('../server/db');
 
 const users = [
   {
@@ -67,36 +67,37 @@ const users = [
   },
 ];
 
-const product = {};
+//const product = {};
 
 const seed = async () => {
   try {
     await db.sync({ force: true });
 
     // seed your database here!
-    const createdUser = await Promise.all(
+    const createdUsers = await Promise.all(
       users.map((user) => {
         return User.create(user);
       })
     );
 
-    const createdProjects = await Promise.all(
-      projects.map((project) => {
-        return Project.create(project);
-      })
-    );
+    // const createdProjects = await Promise.all(
+    //   projects.map((project) => {
+    //     return Project.create(project);
+    //   })
+    // );
 
-    const [rosey, andrew, walle, beebo] = createdRobots;
-    const [trash, dishes, car, homework] = createdProjects;
+    // const [rosey, andrew, walle, beebo] = createdRobots;
+    // const [trash, dishes, car, homework] = createdProjects;
 
-    await rosey.addProjects([dishes, homework]);
-    await walle.addProject(trash);
-    await andrew.addProjects([car, homework]);
+    // //use magic method to give each user a cart
+    // await rosey.addProjects([dishes, homework]);
+    // await walle.addProject(trash);
+    // await andrew.addProjects([car, homework]);
 
     console.log('Seeding Success!');
     db.close();
   } catch (err) {
-    console.log(red(err));
+    console.log(err);
     console.log('Something went wrong!');
     db.close();
   }
@@ -109,11 +110,11 @@ module.exports = seed;
 if (require.main === module) {
   seed()
     .then(() => {
-      console.log(green('Seeding success!'));
+      console.log('Seeding success!');
       db.close();
     })
     .catch((err) => {
-      console.error(red('Oh noes! Something went wrong!'));
+      console.error('Oh noes! Something went wrong!');
       console.error(err);
       db.close();
     });
