@@ -80,277 +80,270 @@ const products = [
   },
   {
     name:'Wheat Flour',
-    category:'',
+    category:'stock items',
     price: 100,
     description: 'A common cooking ingredient made from crushed wheat seeds.',
     imageUrl: '/public/products/Wheat_Flour.png'
   },
   {
     name:'Rice',
-    category:'',
+    category:'stock items',
     price: 200,
     description: 'A basic grain often served under vegetables.',
     imageUrl: '/public/products/Rice.png'
   },
   {
     name:'Oil',
-    category:'',
+    category:'stock items',
     price: 200,
     description: 'All purpose cooking oil.',
     imageUrl: '/public/products/Oil.png'
   },
   {
     name:'Vinegar',
-    category:'',
+    category:'stock items',
     price: 200,
     description: 'An aged fermented liquid used in many cooking recipes.',
     imageUrl: '/public/products/Vinegar.png'
   },
   {
     name:'Basic Fertilizer',
-    category:'',
+    category:'farming utility',
     price: 100,
     description: 'Improves soil quality a little, increasing your chance to grow quality crops. Mix into tilled soil.',
     imageUrl: '/public/products/Basic_Fertilizer.png'
   },
   {
     name:'Quality Fertilizer',
-    category:'',
+    category:'farming utility',
     price: 150,
     description: 'Improves soil quality, increasing your chance to grow quality crops. Mix into tilled soil. (Available in year 2+)',
     imageUrl: '/public/products/Quality_Fertilizer.png'
   },
   {
     name:'Basic Retaining Soil',
-    category:'',
+    category:'farming utility',
     price: 100,
     description: 'This soil has a chance of staying watered overnight. Mix into tilled soil.',
     imageUrl: '/public/products/Basic_Retaining_Soil.png'
   },
   {
     name:'Quality Retaining Soil',
-    category:'',
+    category:'farming utility',
     price: 150,
     description: 'This soil has a good chance of staying watered overnight. Mix into tilled soil.',
     imageUrl: '/public/products/Quality_Retaining_Soil.png'
   },
   {
     name:'Speed-Gro',
-    category:'',
+    category:'farming utility',
     price: 100,
     description: 'Stimulates leaf production. Guaranteed to increase growth rate by at least 10%. Mix into tilled soil.',
     imageUrl: '/public/products/Speed-Gro.png'
   },
   {
     name:'Deluxe Speed-Gro',
-    category:'',
+    category:'farming utility',
     price: 150,
     description: 'Stimulates leaf production. Guaranteed to increase growth rate by at least 25%. Mix into tilled soil.',
     imageUrl: '/public/products/Deluxe_Speed-Gro.png'
   },
   {
     name:'Wallpaper',
-    category:'',
+    category:'stock items',
     price: 100,
     description: 'Decorates the walls of one room',
     imageUrl: '/public/products/36px-Wallpaper_001_Icon.png'
   },
   {
     name:'Flooring',
-    category:'',
+    category:'stock items',
     price: 100,
     description: 'Decorates the floor of one room.',
     imageUrl: '/public/products/40px-Flooring_01_Icon.png'
   },
   {
     name:'Cherry Sapling',
-    category:'',
+    category:'trees',
     price: 3400,
     description: 'Takes 28 days to produce a mature Cherry tree. Bears fruit in the spring. Only grows if the 8 surrounding "tiles" are empty.',
     imageUrl: '/public/products/Cherry_Sapling.png'
   },
   {
     name:'Apricot Sapling',
-    category:'',
+    category:'trees',
     price: 2000,
     description: 'Takes 28 days to produce a mature Apricot tree. Bears fruit in the spring. Only grows if the 8 surrounding "tiles" are empty.',
-    imageUrl: '/public/products/Cherry_Sapling.png'
+    imageUrl: '/public/products/Apricot_Sapling.png'
   },
   {
     name:'Orange Sapling',
-    category:'',
-    price: 100,
+    category:'trees',
+    price: 4000,
     description: 'Takes 28 days to produce a mature Orange tree. Bears fruit in the summer. Only grows if the 8 surrounding "tiles" are empty.',
     imageUrl: '/public/products/Orange_Sapling.png'
   },
   {
     name:'Peach Sapling',
-    category:'',
-    price: 100,
+    category:'trees',
+    price: 6000,
     description: 'Takes 28 days to produce a mature Peach tree. Bears fruit in the summer. Only grows if the 8 surrounding "tiles" are empty.',
     imageUrl: '/public/products/Peach_Sapling.png'
   },
   {
     name:'Pomegranate Sapling',
-    category:'',
-    price: 100,
+    category:'trees',
+    price: 6000,
     description: 'Takes 28 days to produce a mature Pomegranate tree. Bears fruit in the fall. Only grows if the 8 surrounding "tiles" are empty.',
     imageUrl: '/public/products/Pomegranate_Sapling.png'
   },
   {
     name:'Apple Sapling',
-    category:'',
-    price: 100,
+    category:'trees',
+    price: 4000,
     description: 'Takes 28 days to produce a mature Apple tree. Bears fruit in the fall. Only grows if the 8 surrounding "tiles" are empty.',
     imageUrl: '/public/products/Apple_Sapling.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Catalogue',
+    category:'stock items',
+    price: 30000,
+    description: 'Provides unlimited access to all wallpapers and floors... from the convenience of your home!',
+    imageUrl: '/public/products/32px-Catalogue.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Bouquet',
+    category:'stock items',
+    price: 200,
+    description: 'A gift that shows your romantic interest.',
+    imageUrl: '/public/products/Bouquet.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Large Pack',
+    category:'stock items',
+    price: 2000,
+    description: 'A larger pack that you can fit more things into.',
+    imageUrl: '/public/products/Backpack.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Deluxe Pack',
+    category:'stock items',
+    price: 10000,
+    description: 'An even larger pack. I bet you could fit a few chickens in there.',
+    imageUrl: '/public/products/Lg_Backpack.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Eggplant Seeds',
+    category:'seeds',
+    price: 20,
+    description: 'Plant these in the fall. Takes 5 days to mature, and continues to produce after first harvest.',
+    imageUrl: '/public/products/Eggplant_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Corn Seeds',
+    category:'seeds',
+    price: 150,
+    description: 'Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.',
+    imageUrl: '/public/products/Corn_Seeds.png'
   },
   {
-    name:'',
-    category:'',
+    name:'Pumpkin Seeds',
+    category:'seeds',
     price: 100,
-    description: '',
-    imageUrl: ''
+    description: 'Plant these in the fall. Takes 13 days to mature.',
+    imageUrl: '/public/products/Pumpkin_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Bok Choy Seeds',
+    category:'seeds',
+    price: 50,
+    description: 'Plant these in the fall. Takes 4 days to mature.',
+    imageUrl: '/public/products/Bok_Choy_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Yam Seeds',
+    category:'seeds',
+    price: 60,
+    description: 'Plant these in the fall. Takes 10 days to mature.',
+    imageUrl: '/public/products/Yam_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Cranberry Seeds',
+    category:'seeds',
+    price: 240,
+    description: 'Plant these in the fall. Takes 7 days to mature, and continues to produce after first harvest.',
+    imageUrl: '/public/products/Cranberry_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Sunflower Seeds',
+    category:'seeds',
+    price: 200,
+    description: 'Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.',
+    imageUrl: '/public/products/36px-Sunflower_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Fairy Seeds',
+    category:'seeds',
+    price: 200,
+    description: 'Plant in fall. Takes 12 days to produce a mysterious flower. Assorted Colors.',
+    imageUrl: '/public/products/Fairy_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Amaranth Seeds',
+    category:'seeds',
+    price: 70,
+    description: 'Plant these in the fall. Takes 7 days to grow. Harvest with the scythe.',
+    imageUrl: '/public/products/Amaranth_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Grape Starter',
+    category:'seeds',
+    price: 60,
+    description: 'Plant these in the fall. Takes 10 days to grow, but keeps producing after that. Grows on a trellis.',
+    imageUrl: '/public/products/Grape_Starter.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Wheat Seeds',
+    category:'seeds',
+    price: 10,
+    description: 'Plant these in the summer or fall. Takes 4 days to mature. Harvest with the scythe.',
+    imageUrl: '/public/products/Wheat_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Artichoke Seeds',
+    category:'seeds',
+    price: 30,
+    description: 'Plant these in the fall. Takes 8 days to mature.',
+    imageUrl: '/public/products/Artichoke_Seeds.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Jack-O-Lantern',
+    category:'seasonal decor',
+    price: 750,
+    description: 'A whimsical fall decoration.',
+    imageUrl: '/public/products/Jack-O-Lantern.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Rarecrow 2',
+    category:'seasonal decor',
+    price: 5000,
+    description: 'One of 8 special scarecrows. Collect them all!',
+    imageUrl: '/public/products/36px-Rarecrow_2.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Grave Stone',
+    category:'seasonal decor',
+    price: 350,
+    description: 'A decorative piece for your farm.',
+    imageUrl: '/public/products/36px-Grave_Stone.png'
   },
   {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
+    name:'Funky Rug',
+    category:'seasonal decor',
+    price: 4000,
+    description: 'Can be placed inside your house.',
+    imageUrl: '/public/products/70px-Funky_Rug.png'
   },
-  {
-    name:'',
-    category:'',
-    price: 100,
-    description: '',
-    imageUrl: ''
-  }
 ];
 
 const seed = async () => {
