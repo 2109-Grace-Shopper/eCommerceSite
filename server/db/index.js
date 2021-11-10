@@ -22,11 +22,14 @@ Order.belongsTo(Address);
 Payment.hasMany(Order);
 Order.belongsTo(Payment);
 
-Order.hasMany(OrderLine);
-OrderLine.belongsTo(Order);
+Order.belongsToMany(Product, { through: OrderLine });
+Product.belongsToMany(Order, { through: OrderLine });
 
-OrderLine.hasOne(Product);
-Product.belongsTo(OrderLine);
+// Order.hasMany(OrderLine);
+// OrderLine.belongsTo(Order);
+
+// Product.hasMany(OrderLine);
+// OrderLine.belongsTo(Product);
 
 module.exports = {
   db,
