@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Order = db.define('cart', {
-  totalAmount: {
+const Order = db.define('order', {
+  total: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
   },
