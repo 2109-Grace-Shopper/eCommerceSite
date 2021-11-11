@@ -19,6 +19,7 @@ class AllProducts extends React.Component {
     };
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.filterProducts = this.filterProducts.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFilterChange(evt) {
@@ -33,6 +34,11 @@ class AllProducts extends React.Component {
         (product) => product.category === this.state.filter
       );
     }
+  }
+
+  handleSubmit(product) {
+    // Will have to change this later after adding cart functionality
+    console.log(`${product.name} (cost ${product.price}g) added to cart`);
   }
 
   componentDidMount() {
@@ -63,7 +69,11 @@ class AllProducts extends React.Component {
         <div className="productsContainer">
           {products.length === 0 && <h1>No products to display!</h1>}
           {products.map((product) => (
-            <Card key={product.id} sx={{ width: 275, margin: 3 }}>
+            <Card
+              key={product.id}
+              sx={{ width: 275, margin: 3 }}
+              onClick={() => this.handleSubmit(product)}
+            >
               <Grid
                 container
                 direction="column"
