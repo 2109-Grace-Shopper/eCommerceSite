@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png');
+  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png')
+    fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -34,4 +35,11 @@ label {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.productsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
 }

@@ -10,8 +10,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Link to="/" className="navLink">
         Home
       </Link>
-      <Link to="#" className="navLink">
-        All Products
+      <Link to="/products" className="navLink">
+        Products
       </Link>
       <Link to="#" className="navLink">
         About
