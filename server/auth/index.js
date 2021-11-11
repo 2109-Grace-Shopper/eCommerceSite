@@ -4,7 +4,7 @@ module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body)}); 
+    res.send({ token: await User.authenticate(req.body)});
   } catch (err) {
     next(err)
   }
@@ -13,6 +13,7 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
+    console.log(req.body)
     const user = await User.create(req.body)
     res.send({token: await user.generateToken()})
   } catch (err) {
@@ -31,3 +32,9 @@ router.get('/me', async (req, res, next) => {
     next(ex)
   }
 })
+
+// router.post('/logout', (req, res) => {
+//   req.logout()
+//   req.session.destroy()
+//   res.redirect('/')
+// })
