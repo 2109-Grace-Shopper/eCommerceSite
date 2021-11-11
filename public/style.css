@@ -43,3 +43,18 @@ form div {
   flex-wrap: wrap;
   height: 100%;
 }
+
+.filter {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.filter > h3 {
+  padding-right: 20px;
+}
+
+#productsFilter {
+  font-weight: 900;
+  font-size: large;
+  padding-top: 10px;
+}
