@@ -36,6 +36,16 @@ form div {
   display: inline-block;
 }
 
+/* home page */
+
+.stardew{
+  width: 80%;
+}
+
+.MuiContainer-root{
+  margin-top: 10%;
+}
+
 /* Sign up and Login page */
 
 input { 
@@ -71,4 +81,22 @@ input:focus {
 .signup__link:focus,
 .signup__link:hover{
   color: darken(#999, 13%)
+}
+
+/* about page */
+.MuiBox-root{
+  height: 600px;
+  text-align: center;
+}
+.MuiBox-root:hover{
+  background-color: "pink"
+}
+
+.MuiGrid-root{
+  padding: 5px;
+  margin: auto 5%;
+}
+.owner{
+  width: 100px;
+  height: 100px;
 }
