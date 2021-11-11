@@ -19,3 +19,13 @@ router.get('/', async (req, res, next) => {
 })
 
 //GET single user
+//api/users/1
+router.get('/:userId', async (req, res, next) => {
+  try {
+      const users = await User.findByPk(req.params.userId)
+      res.send(users)
+  }
+  catch(error) {
+      next(error)
+  }
+})
