@@ -12,7 +12,7 @@ const AuthForm = props => {
 
     const paperStyle = {
         padding: 30,
-        height: '45vh',
+        height: '55vh',
         width: 280,
         margin: "100px auto"
     }

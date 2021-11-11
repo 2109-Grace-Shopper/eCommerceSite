@@ -1,18 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '@mui/material/Button';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { Container, Grid, Item } from '@mui/material';
 
 /**
  * COMPONENT
  */
 export const Home = (props) => {
-  const { username } = props;
+  const { firstName } = props
 
   return (
-    <div>
-      {/* <h3>Welcome, {username}</h3> */}
-      <Button variant="contained">Hello World</Button>
-    </div>
+    <Container maxWidth="xl" justify = "center" className="home">
+      <Grid container spacing={2}>
+        <Grid item xs={4} >
+          <h1>Give Yourself <br />A New Way to Buy!</h1>
+          <p>Welcome {firstName} to Pierre's General Store!<br />Our new eCommerce store is online, try the new features in our website, you will be pleasantly surprised. Fall season items are available now!</p>
+          <Button endIcon={<ArrowRightAltIcon />} href="/allProducts" variant="contained">Explore now </Button>
+        </Grid>
+        <Grid item xs={8}>
+          <img className="stardew" src="home/StardewValley.png" alt="Stardew Valley"/>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
@@ -21,7 +31,7 @@ export const Home = (props) => {
  */
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    firstName: state.auth.firstName,
   };
 };
 

@@ -37,6 +37,19 @@ form div {
   display: inline-block;
 }
 
+
+/* home page */
+
+.stardew{
+  width: 80%;
+}
+
+.MuiContainer-root{
+  margin-top: 10%;
+}
+
+
+
 /* Single Product Styles */
 .singleProductDiv{
   display: flex;
@@ -50,7 +63,7 @@ form div {
   overflow-wrap: normal;
 }
 
-input{
+.inputQty{
   margin-right: 1rem;
 }
 
@@ -61,6 +74,7 @@ input{
   flex-wrap: wrap;
   height: 100%;
 }
+
 
 .filter {
   display: flex;
@@ -112,3 +126,23 @@ input:focus {
 .signup__link:hover{
   color: darken(#999, 13%)
 }
+
+
+/* about page */
+.MuiBox-root{
+  height: 600px;
+  text-align: center;
+}
+.MuiBox-root:hover{
+  background-color: "pink"
+}
+
+.MuiGrid-root{
+  padding: 5px;
+  margin: auto 5%;
+}
+.owner{
+  width: 100px;
+  height: 100px;
+}
+

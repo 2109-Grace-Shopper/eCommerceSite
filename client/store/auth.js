@@ -26,7 +26,7 @@ export const me = () => async dispatch => {
         authorization: token
       }
     })
-    return dispatch(setAuth(res.data))
+    return dispatch(setAuth(res.data));
   }
 }
 
@@ -45,8 +45,8 @@ export const signup_me = () => async dispatch => {
 export const authenticate = (email, password, method) => async dispatch => {
   try {
     const res = await axios.post(`/auth/${method}`, {email, password})
-    window.localStorage.setItem(TOKEN, res.data.token)
-    dispatch(me())
+    window.localStorage.setItem(TOKEN, res.data.token);
+    history.push("/");
   } catch (authError) {
     return dispatch(setAuth({error: authError}))
   }
@@ -55,8 +55,9 @@ export const authenticate = (email, password, method) => async dispatch => {
 export const signup = (firstName, lastName, email, password, method) => async dispatch => {
   try {
     const res = await axios.post(`/auth/${method}`, {firstName, lastName, email, password})
-    window.localStorage.setItem(TOKEN, res.data.token)
-    dispatch(signup_me())
+    window.localStorage.setItem(TOKEN, res.data.token);
+    history.push("/");
+    dispatch(signup_me());
   } catch (authError) {
     return dispatch(signUp({error: authError}))
   }
