@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png');
+  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png')
+    fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -34,6 +35,29 @@ label {
 form div {
   margin: 0.5em;
   display: inline-block;
+}
+
+/* All Products Style */
+.productsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.filter {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.filter > h3 {
+  padding-right: 20px;
+}
+
+#productsFilter {
+  font-weight: 900;
+  font-size: large;
+  padding-top: 10px;
 }
 
 /* Sign up and Login page */
@@ -72,3 +96,4 @@ input:focus {
 .signup__link:hover{
   color: darken(#999, 13%)
 }
+
