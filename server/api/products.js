@@ -4,6 +4,37 @@ const {
 } = require('../db');
 module.exports = router;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//get single product
 router.get('/:id', async (req, res, next) => {
   try{
     const id = req.params.id;
@@ -18,4 +49,30 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
   
+})
+
+//edit product, will need to require admin token
+
+router.put('/:id', async (req, res, next) => {
+  try{
+    const id = req.params.id;
+    const productToUpdate = await Product.findByPk(id);
+    res.send(await productToUpdate.update(req.body))
+
+  }catch(error){
+    next(error)
+  }
+})
+
+//delete product, will need to require admin token
+
+router.delete('/:id', async (req, res, next) => {
+  try{
+    const id = req.params.id;
+    const productToDelete = await Product.findByPk(id);
+    await productToDelete.destroy();
+    res.send(productToDelete)
+  }catch(error){
+    next(error)
+  }
 })
