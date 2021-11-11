@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png');
+  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png')
+    fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -32,10 +33,11 @@ label {
 }
 
 form div {
-  margin: 1em;
+  margin: 0.5em;
   display: inline-block;
 }
 
+/* Single Product Styles */
 .singleProductDiv{
   display: flex;
   align-items: center;
@@ -50,4 +52,63 @@ form div {
 
 input{
   margin-right: 1rem;
+}
+
+/* All Products Style */
+.productsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.filter {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.filter > h3 {
+  padding-right: 20px;
+}
+
+#productsFilter {
+  font-weight: 900;
+  font-size: large;
+  padding-top: 10px;
+}
+
+/* Sign up and Login page */
+input { 
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 250px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+input:focus,
+input:focus {
+  border-bottom: 2px solid #16a085;
+  color: #16a085;
+  transition: 0.2s ease;
+}
+
+.signup__link{
+  text-align: center;
+  margin-top: 2em;
+  font-size: .8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #999;
+}
+
+.signup__link:focus,
+.signup__link:hover{
+  color: darken(#999, 13%)
 }

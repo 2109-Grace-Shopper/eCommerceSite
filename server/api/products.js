@@ -4,35 +4,15 @@ const {
 } = require('../db');
 module.exports = router;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// GET api/products
+router.get('/', async function (req, res, next) {
+  try {
+    const products = await Product.findAll();
+    res.send(products);
+  } catch (error) {
+    next(error);
+  }
+});
 
 //get single product
 router.get('/:id', async (req, res, next) => {
@@ -48,7 +28,6 @@ router.get('/:id', async (req, res, next) => {
   } catch(error){
     next(error)
   }
-  
 })
 
 //edit product, will need to require admin token

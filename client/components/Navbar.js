@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';;
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div className="navbar">
@@ -10,14 +11,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       <Link to="/" className="navLink">
         Home
       </Link>
-      <Link to="#" className="navLink">
-        All Products
+      <Link to="/products" className="navLink">
+        Products
       </Link>
       <Link to="#" className="navLink">
         About
-      </Link>
-      <Link to="#" className="navLink">
-        Cart
       </Link>
       {isLoggedIn ? (
         <Link to="#" className="navLink">
@@ -28,6 +26,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           Login
         </Link>
       )}
+      <Link to="#" className="navLink">
+        <ShoppingCartIcon fontSize="middle"/>
+      </Link>
     </nav>
   </div>
 );
