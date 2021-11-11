@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png');
+  background: url('https://blogs.uww.edu/stardewvalleyblog/files/2021/02/mountainsBg.png')
+    fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -36,6 +37,7 @@ form div {
   display: inline-block;
 }
 
+
 /* home page */
 
 .stardew{
@@ -46,8 +48,50 @@ form div {
   margin-top: 10%;
 }
 
-/* Sign up and Login page */
 
+
+/* Single Product Styles */
+.singleProductDiv{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.singleProductDesc{
+  overflow-wrap: normal;
+}
+
+.inputQty{
+  margin-right: 1rem;
+}
+
+/* All Products Style */
+.productsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+
+.filter {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.filter > h3 {
+  padding-right: 20px;
+}
+
+#productsFilter {
+  font-weight: 900;
+  font-size: large;
+  padding-top: 10px;
+}
+
+/* Sign up and Login page */
 input { 
   display: block;
   box-sizing: border-box;
@@ -83,6 +127,7 @@ input:focus {
   color: darken(#999, 13%)
 }
 
+
 /* about page */
 .MuiBox-root{
   height: 600px;
@@ -100,3 +145,4 @@ input:focus {
   width: 100px;
   height: 100px;
 }
+

@@ -17,6 +17,7 @@ const signUp = signup => ({type: SIGN_UP, signup})
 /**
  * THUNK CREATORS
  */
+
 export const me = () => async dispatch => {
   const token = window.localStorage.getItem(TOKEN)
   if (token) {

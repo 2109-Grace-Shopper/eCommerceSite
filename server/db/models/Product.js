@@ -30,7 +30,8 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: '/public/products/plastic-bag.png',
+    defaultValue:
+      'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/products/plastic-bag.png',
   },
 });
 

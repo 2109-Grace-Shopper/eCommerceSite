@@ -36,7 +36,8 @@ const User = db.define('user', {
   },
   avatar: {
     type: Sequelize.STRING,
-    defaultValue: '/public/users/Junimo.png',
+    defaultValue:
+      'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/users/Junimo.png',
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
