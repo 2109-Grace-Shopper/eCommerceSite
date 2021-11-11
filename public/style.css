@@ -35,3 +35,19 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.singleProductDiv{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.singleProductDesc{
+  overflow-wrap: normal;
+}
+
+input{
+  margin-right: 1rem;
+}

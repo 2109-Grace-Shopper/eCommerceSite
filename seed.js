@@ -117,7 +117,7 @@ const products = [
     name:'Quality Fertilizer',
     category:'farming utility',
     price: 150,
-    description: 'Improves soil quality, increasing your chance to grow quality crops. Mix into tilled soil. (Available in year 2+)',
+    description: 'Improves soil quality, increasing your chance to grow quality crops. Mix into tilled soil.',
     imageUrl: '/public/products/Quality_Fertilizer.png'
   },
   {
@@ -166,42 +166,42 @@ const products = [
     name:'Cherry Sapling',
     category:'trees',
     price: 3400,
-    description: 'Takes 28 days to produce a mature Cherry tree. Bears fruit in the spring. Only grows if the 8 surrounding "tiles" are empty.',
+    description: 'Takes 28 days to produce a mature Cherry tree. Bears fruit in the spring.',
     imageUrl: '/public/products/Cherry_Sapling.png'
   },
   {
     name:'Apricot Sapling',
     category:'trees',
     price: 2000,
-    description: 'Takes 28 days to produce a mature Apricot tree. Bears fruit in the spring. Only grows if the 8 surrounding "tiles" are empty.',
+    description: 'Takes 28 days to produce a mature Apricot tree. Bears fruit in the spring.',
     imageUrl: '/public/products/Apricot_Sapling.png'
   },
   {
     name:'Orange Sapling',
     category:'trees',
     price: 4000,
-    description: 'Takes 28 days to produce a mature Orange tree. Bears fruit in the summer. Only grows if the 8 surrounding "tiles" are empty.',
+    description: 'Takes 28 days to produce a mature Orange tree. Bears fruit in the summer.',
     imageUrl: '/public/products/Orange_Sapling.png'
   },
   {
     name:'Peach Sapling',
     category:'trees',
     price: 6000,
-    description: 'Takes 28 days to produce a mature Peach tree. Bears fruit in the summer. Only grows if the 8 surrounding "tiles" are empty.',
+    description: 'Takes 28 days to produce a mature Peach tree. Bears fruit in the summer.',
     imageUrl: '/public/products/Peach_Sapling.png'
   },
   {
     name:'Pomegranate Sapling',
     category:'trees',
     price: 6000,
-    description: 'Takes 28 days to produce a mature Pomegranate tree. Bears fruit in the fall. Only grows if the 8 surrounding "tiles" are empty.',
+    description: 'Takes 28 days to produce a mature Pomegranate tree. Bears fruit in the fall.',
     imageUrl: '/public/products/Pomegranate_Sapling.png'
   },
   {
     name:'Apple Sapling',
     category:'trees',
     price: 4000,
-    description: 'Takes 28 days to produce a mature Apple tree. Bears fruit in the fall. Only grows if the 8 surrounding "tiles" are empty.',
+    description: 'Takes 28 days to produce a mature Apple tree. Bears fruit in the fall.',
     imageUrl: '/public/products/Apple_Sapling.png'
   },
   {
