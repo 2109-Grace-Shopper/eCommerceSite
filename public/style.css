@@ -37,6 +37,23 @@ form div {
   display: inline-block;
 }
 
+/* Single Product Styles */
+.singleProductDiv{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.singleProductDesc{
+  overflow-wrap: normal;
+}
+
+input{
+  margin-right: 1rem;
+}
+
 /* All Products Style */
 .productsContainer {
   display: flex;
@@ -61,7 +78,6 @@ form div {
 }
 
 /* Sign up and Login page */
-
 input { 
   display: block;
   box-sizing: border-box;
@@ -96,4 +112,3 @@ input:focus {
 .signup__link:hover{
   color: darken(#999, 13%)
 }
-
