@@ -356,7 +356,7 @@ const seed = async () => {
         return User.create(user);
       })
     );
-    
+
     //updated for products:
     const createdProducts = await Promise.all(
       products.map((product) => {
