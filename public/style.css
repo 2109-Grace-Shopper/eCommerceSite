@@ -75,8 +75,8 @@ input:focus {
 
 /* Profile page */
 .MuiBox-root-1{
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 350px;
+  padding-right: 350px;
   text-align: center;
   align-content: center;
   border: 60px;
@@ -97,9 +97,3 @@ input:focus {
   padding: 2px;
   margin:2px;
 }
-
-/* padding: 100px;
-text-align: center;
-align-items: center;
-box-sizing: border-box;
-margin: 100px; */
