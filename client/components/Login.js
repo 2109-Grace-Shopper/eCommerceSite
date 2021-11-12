@@ -1,7 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signup } from '../store';
-import { Grid, Paper, Avatar, Button } from '@material-ui/core';
+import { authenticate } from '../store';
+import {
+  Grid,
+  Paper,
+  Avatar,
+  CustomInput,
+  Button,
+  Typography,
+  Link,
+} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const AuthForm = (props) => {
@@ -9,7 +17,7 @@ const AuthForm = (props) => {
 
   const paperStyle = {
     padding: 30,
-    height: '55vh',
+    height: '50vh',
     width: 280,
     margin: '100px auto',
   };
@@ -27,28 +35,18 @@ const AuthForm = (props) => {
           <Avatar style={avatarStyle}>
             <LockOutlinedIcon />
           </Avatar>
-          <h2>Sign Up</h2>
+          <h2>Sign In</h2>
         </Grid>
         <form onSubmit={handleSubmit} name={name}>
           <div>
-            <input
-              name="firstName"
-              type="text"
-              placeholder="First Name"
-              required="required"
-            />
-            <input
-              name="lastName"
-              type="text"
-              placeholder="Last Name"
-              required="required"
-            />
+            <label htmlFor="email"></label>
             <input
               name="email"
               type="email"
               placeholder="Email"
               required="required"
             />
+            <label htmlFor="password"></label>
             <input
               name="password"
               type="password"
@@ -67,13 +65,16 @@ const AuthForm = (props) => {
           </Button>
           {error && error.response && <div>{error.response.data}</div>}
         </form>
+        <div className="signup__link">
+          <Link href="/signup">I want to sign up</Link>
+        </div>
       </Paper>
     </Grid>
   );
 };
 
-const mapSignup = (state) => {
-  return { name: 'signup', displayName: 'Sign Up', error: state.auth.error };
+const mapLogin = (state) => {
+  return { name: 'login', displayName: 'Login', error: state.auth.error };
 };
 
 const mapDispatch = (dispatch) => {
@@ -81,13 +82,11 @@ const mapDispatch = (dispatch) => {
     handleSubmit(evt) {
       evt.preventDefault();
       const formName = evt.target.name;
-      const firstName = evt.target.firstName.value;
-      const lastName = evt.target.lastName.value;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(signup(firstName, lastName, email, password, formName));
+      dispatch(authenticate(email, password, formName));
     },
   };
 };
 
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export const Login = connect(mapLogin, mapDispatch)(AuthForm);

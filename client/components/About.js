@@ -1,53 +1,73 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Button from '@mui/material/Button';
-import { Container, Box, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
-/**
- * COMPONENT
- */
-export const About = (props) => {
-  const { firstName } = props
-
+const About = () => {
   return (
-      <Container>
-        <Box className="box" bgcolor="#E4FBFF" justifyContent="center" alignItems="center">
-        <Grid>
-            <h1>Our Story</h1>
-            <div>
-                <p>Pierre's General Store sells various seeds, saplings, fertilizer, ingredients and other useful items. As well as selling those items, Pierre also buys foraged items, crops, artisan goods, cooked dishes, and animal products from the player, which avoids waiting overnight for shipping. Some products in stock, namely seeds, will vary from season to season and others are in-stock year-round. Pierre's main competitor in the valley is JojaMart.</p>
-                <p>Pierre's General Store is normally open most days at 9am, three hours after the player wakes up, and closes at 5pm. The player can enter the building until 9pm, but Pierre leaves the sales counter at 5pm every day, so the shop cannot actually be used to purchase or sell goods after 5pm. This is because the building also serves as Pierre's family home.</p>
-            </div>  
-            </Grid>
-    
-        <h3>Ownership</h3>  
-        <Grid container spacing={2} >
-            <Grid item xs>
-                <img className="owner" src="./pierre1.png" alt="pierre"/>
-                <p>Pierre</p>
-            </Grid>
-            <Grid item xs>
-                <img className="owner" src="./Caroline.png" alt="Caroline"/>
-                <p>Caroline</p>
-            </Grid>
-            <Grid item xs>
-                <img className="owner" src="./Abigail.png" alt="Abigall"/>
-                <p>Abigail</p>
-            </Grid>
+    <Box
+      className="box"
+      bgcolor="#E4FBFF"
+      justifyContent="center"
+      alignItems="center"
+      sx={{ width: 1000 }}
+    >
+      <Grid className="about">
+        <h1>Our Story</h1>
+        <div>
+          <p>
+            Pierre's General Store has a proud history that spans as far back
+            since the creation of the Stardew Valley community.
+            <br />
+            We take great pride in offering the best produce cultivated by our
+            valley's very own talented farmers.
+            <br />
+            Choose from a variety of seeds, sapling trees, fertilizers for your
+            own crops, quality ingredients, seasonal decor, and more.
+            <br />
+            We also change our stock seasonally, so be sure to stop by often for
+            the latest goods we have to offer!
+            <br />
+            <br />
+            Thanks for choosing Pierre's! We are definitely way better than
+            JojaMart :)
+          </p>
+          <h3>Hours of Operation</h3>
+          <p>
+            Closed on Wednesdays
+            <br />
+            Open all other days from 9a - 5p
+          </p>
+        </div>
+      </Grid>
+
+      <h3>Ownership</h3>
+      <Grid container spacing={2}>
+        <Grid item xs>
+          <img
+            className="owner"
+            src="https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/about/pierre1.png"
+            alt="pierre"
+          />
+          <p>Pierre</p>
         </Grid>
-        </Box>
-    
-      </Container>
+        <Grid item xs>
+          <img
+            className="owner"
+            src="https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/about/Caroline.png"
+            alt="Caroline"
+          />
+          <p>Caroline</p>
+        </Grid>
+        <Grid item xs>
+          <img
+            className="owner"
+            src="https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/about/Abigail.png"
+            alt="Abigall"
+          />
+          <p>Abigail</p>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    firstName: state.auth.firstName,
-  };
-};
-
-export default connect(mapState)(About);
+export default About;

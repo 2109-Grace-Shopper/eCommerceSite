@@ -80,7 +80,7 @@ class AllProducts extends React.Component {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Link to="#">
+                <Link to={`/products/${product.id}`}>
                   <h3 style={{ fontSize: 23 }}>{product.name}</h3>
                 </Link>
                 <img src={product.imageUrl} width="75px" height="75px" />
