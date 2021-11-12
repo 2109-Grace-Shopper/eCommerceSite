@@ -33,6 +33,7 @@ import { Label } from '@material-ui/icons';
               <Button><h4 className={'profilebuttonlabel'}>Edit Profile</h4></Button>
               <Button><h4 className={'profilebuttonlabel'}>Previous Purchases</h4></Button>
               <Button><h4 className={'profilebuttonlabel'}>My Cart</h4></Button>
+              <Button><h4 className={'profilebuttonlabel'}>Log Out</h4></Button>
             </Paper>
           </Box>
     )
