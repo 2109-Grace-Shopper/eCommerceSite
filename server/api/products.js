@@ -3,9 +3,23 @@ const {
   models: { Product },
 } = require('../db');
 module.exports = router;
+const { models: { User }} = require('../db')
+
+const isAdmin = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    if(!user.isAdmin){
+      console.log("error!")
+    }
+    next();
+  } catch(error) {
+    next(error);
+  }
+};
 
 // GET api/products
-router.get('/', async function (req, res, next) {
+router.get('/', isAdmin, async function (req, res, next) {
   try {
     const products = await Product.findAll();
     res.send(products);

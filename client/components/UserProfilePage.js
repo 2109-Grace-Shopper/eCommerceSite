@@ -4,30 +4,26 @@ import { fetchSingleUser } from '../store';
 import { Grid, Paper, Avatar, Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { Label } from '@material-ui/icons';
-//import '../../public/style.css'
-import {logout} from '../store'
+import { logout } from '../store';
 
-/**
- * COMPONENT
- */
-const ProfilePage = (props) => {
-  console.log(props)
+export class ProfilePage extends React.Component {
+  render() {
     return (
       <Box>
         <Paper elevation={10}>
           <h4>
-            Hello, {props.loggedinuser.firstName}&nbsp;
+            Hello, {this.props.loggedInUser.firstName}&nbsp;
             <span className="wave">👋 </span>
           </h4>
           <img
-            src={props.loggedinuser.avatar}
+            src={this.props.loggedInUser.avatar}
             style={{ width: '100px', height: '100px' }}
           />
           <h4>
-            Name: {props.loggedinuser.firstName}{' '}
-            {props.loggedinuser.lastName}{' '}
+            Name: {this.props.loggedInUser.firstName}{' '}
+            {this.props.loggedInUser.lastName}{' '}
           </h4>
-          <h4>Email: {props.loggedinuser.email}</h4>
+          <h4>Email: {this.props.loggedInUser.email}</h4>
           <Button>
             <h4 className={'profilebuttonlabel'}>Edit Profile</h4>
           </Button>
@@ -37,27 +33,28 @@ const ProfilePage = (props) => {
           <Button>
             <h4 className={'profilebuttonlabel'}>My Cart</h4>
           </Button>
-          <Button onClick={props.handleClick()}>
+          <Button onClick={this.props.handleClick}>
             <h4 className={'profilebuttonlabel'}>Log Out</h4>
           </Button>
         </Paper>
       </Box>
     );
   }
+}
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
-    loggedinuser: state.auth, //we used this to get the profile information without having to use user/id
+    loggedInUser: state.auth, //we used this to get the profile information without having to use user/id
     //leveraged the auth which uses findByToken to get the profile data
   };
-}
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
 export const Profile = connect(mapStateToProps, mapDispatch)(ProfilePage);
