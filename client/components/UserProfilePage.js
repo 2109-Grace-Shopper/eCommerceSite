@@ -18,15 +18,6 @@ import Box from '@material-ui/core/Box';
 
   constructor() {
     super();
-    //   const paperStyle = {
-    //     padding: 30,
-    //     height: '50vh',
-    //     width: 280,
-    //     margin: "100px auto"
-    // }
-    // const avatarStyle = {
-    //     backgroundColor: '#1bbd7e'
-    // }
   }
   
 
@@ -34,10 +25,14 @@ import Box from '@material-ui/core/Box';
     return (
           <Box>
             <Paper elevation={10}>
-            <Avatar> Avatar Profile: {this.props.loggedinuser.avatar}</Avatar>
-            <h2>Name: {this.props.loggedinuser.firstName} {this.props.loggedinuser.lastName} </h2>
-            <h2>Email: {this.props.loggedinuser.email}</h2>
-            <Button><h3>Previous Purchases</h3></Button>
+              {/* <Avatar> Avatar Profile: {this.props.loggedinuser.avatar} </Avatar> */}
+              <h4>Hello, {this.props.loggedinuser.firstName}&nbsp;<span class="wave">👋 </span></h4>
+              <img src={this.props.loggedinuser.avatar} style={{ width: '100px', height: '100px'}} />
+              <h4>Name: {this.props.loggedinuser.firstName} {this.props.loggedinuser.lastName} </h4>
+              <h4>Email: {this.props.loggedinuser.email}</h4>
+              <Button><h4>Edit Profile</h4></Button>
+              <Button><h4>Previous Purchases</h4></Button>
+              <Button><h4>Continue Shopping</h4></Button>
             </Paper>
           </Box>
     )

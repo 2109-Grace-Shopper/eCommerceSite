@@ -6,7 +6,7 @@ const users = [
     lastName: 'Bartender',
     email: 'gusbartender@stardewvalley.com',
     password: '12345',
-    avatar: '/public/users/Gus.png',
+    avatar: 'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/users/Gus.png',
     isAdmin: false,
   },
   {
@@ -14,7 +14,7 @@ const users = [
     lastName: 'Mom',
     email: 'jodimom@stardewvalley.com',
     password: '12345',
-    avatar: '/public/users/Jodi.png',
+    avatar: 'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/users/Jodi.png',
     isAdmin: false,
   },
   {
@@ -22,7 +22,7 @@ const users = [
     lastName: 'Rancher',
     email: 'marnierancher@stardewvalley.com',
     password: '12345',
-    avatar: '/public/users/Marnie.png',
+    avatar: 'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/users/Marnie.png',
     isAdmin: false,
   },
   {
@@ -30,7 +30,7 @@ const users = [
     lastName: 'Stocker',
     email: 'shanestocker@stardewvalley.com',
     password: '12345',
-    avatar: '/public/users/Shane.png',
+    avatar: 'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/users/Shane.png',
     isAdmin: false,
   },
   {

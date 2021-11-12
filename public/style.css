@@ -75,11 +75,31 @@ input:focus {
 
 /* Profile page */
 .MuiBox-root-1{
-  padding:100px;
+  padding: 60px;
   text-align: center;
-  align-items: center;
-  box-sizing: border-box;
+  align-content: center;
+  /* box-sizing: border-box; */
+  border: 60px;
+  margin: 120px; 
+  color: white;
 }
 .profileimage{
   align-items: center;
 }
+.MuiButton-root{
+  color:#2840c7;
+  padding: 2px;
+  margin:2px;
+}
+
+.MuiButton-label{
+  color:#2840c7;
+  padding: 2px;
+  margin:2px;
+}
+
+/* padding: 100px;
+text-align: center;
+align-items: center;
+box-sizing: border-box;
+margin: 100px; */
