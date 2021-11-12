@@ -6,6 +6,7 @@ import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { Login } from './components/Login';
 import { Signup } from './components/SignUp';
+import { Profile } from './components/UserProfilePage';
 import { me } from './store';
 import About from './components/About';
 
@@ -26,6 +27,7 @@ class Routes extends Component {
           <Route exact path="/about" component={About} />
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:productId" component={SingleProduct} />
+          <Route exact path="/profile" component={Profile} />
         </Switch>
       </div>
     );
