@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Product },
+  models: { Product, User },
 } = require('../db');
 module.exports = router;
 const { models: { User }} = require('../db')
@@ -18,6 +18,20 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
+const isAdminCheck = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    if (user.isAdmin) {
+      next();
+    } else {
+      throw new Error("Get out of here, Morris! You're not allowed!");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 // GET api/products
 router.get('/', isAdmin, async function (req, res, next) {
   try {
@@ -29,7 +43,7 @@ router.get('/', isAdmin, async function (req, res, next) {
 });
 
 // POST api/products ---- WILL NEED ADMIN TOKEN
-router.post('/', async function (req, res, next) {
+router.post('/', isAdminCheck, async function (req, res, next) {
   try {
     const product = await Product.create(req.body);
     res.send(product);
@@ -56,7 +70,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // PUT api/product/:id ---- WILL NEED ADMIN TOKEN
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAdminCheck, async (req, res, next) => {
   try {
     const id = req.params.id;
     const productToUpdate = await Product.findByPk(id);
@@ -67,7 +81,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // DELETE api/product/:id ---- WILL NEED ADMIN TOKEN
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', isAdminCheck, async (req, res, next) => {
   try {
     const id = req.params.id;
     const productToDelete = await Product.findByPk(id);

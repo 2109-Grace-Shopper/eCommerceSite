@@ -4,9 +4,23 @@ const {
 } = require('../db');
 module.exports = router;
 
+const isAdminCheck = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    if (user.isAdmin) {
+      next();
+    } else {
+      throw new Error("Get out of here, Morris! You're not allowed!");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 //GET all users
 //api/users
-router.get('/', async (req, res, next) => {
+router.get('/', isAdminCheck, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
@@ -30,7 +44,7 @@ router.get('/', async (req, res, next) => {
 
 //GET single user
 //api/users/1
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', isAdminCheck, async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId);
     res.send(users);
