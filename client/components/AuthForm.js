@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {authenticate} from '../store';
 import {Grid, Paper, Avatar, CustomInput, Button, Typography, Link} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useHistory } from "react-router-dom";
 
 /**
  * COMPONENT
@@ -22,6 +23,20 @@ const AuthForm = props => {
     const btnstyle = {
         margin: '8px 0'
     }
+    
+    //added to redirect to profile page once user logged in
+    const history = useHistory();
+
+    const handleSubmitProfile = (evt) => {
+        console.log('starting dispatch')
+        //wont run until the promise is resolved
+        handleSubmit(evt)
+        .then(()=>{
+            console.log('then go to profile')
+            let path = '/profile'; 
+            history.push(path);
+        })
+    }
 
     return (
         <Grid>
@@ -30,7 +45,7 @@ const AuthForm = props => {
                     <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
-                <form onSubmit={handleSubmit} name={name}>
+                <form onSubmit={handleSubmitProfile} name={name}>
                     <div>
                         <label htmlFor="email">
                         </label>
@@ -81,7 +96,7 @@ const mapDispatch = dispatch => {
             const formName = evt.target.name
             const email = evt.target.email.value
             const password = evt.target.password.value
-            dispatch(authenticate(email, password, formName))
+            return dispatch(authenticate(email, password, formName))
         }
     }
 }

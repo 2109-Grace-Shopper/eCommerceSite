@@ -75,10 +75,10 @@ input:focus {
 
 /* Profile page */
 .MuiBox-root-1{
-  padding: 60px;
+  padding-left: 200px;
+  padding-right: 200px;
   text-align: center;
   align-content: center;
-  /* box-sizing: border-box; */
   border: 60px;
   margin: 120px; 
   color: white;
@@ -86,13 +86,13 @@ input:focus {
 .profileimage{
   align-items: center;
 }
-.MuiButton-root{
-  color:#2840c7;
+.MuiButton-containedPrimary{
+  background-color:#2840c7;
   padding: 2px;
   margin:2px;
 }
 
-.MuiButton-label{
+.profilebuttonlabel{
   color:#2840c7;
   padding: 2px;
   margin:2px;
