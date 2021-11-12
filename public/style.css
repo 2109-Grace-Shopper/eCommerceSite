@@ -144,3 +144,28 @@ input:focus {
 .signup__link:hover {
   color: darken(#999, 13%);
 }
+
+/* Profile page */
+.MuiBox-root-1 {
+  padding-left: 350px;
+  padding-right: 350px;
+  text-align: center;
+  align-content: center;
+  border: 60px;
+  margin: 120px;
+  color: white;
+}
+.profileimage {
+  align-items: center;
+}
+.MuiButton-containedPrimary {
+  background-color: #2840c7;
+  padding: 2px;
+  margin: 2px;
+}
+
+.profilebuttonlabel {
+  color: #2840c7;
+  padding: 2px;
+  margin: 2px;
+}

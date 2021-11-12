@@ -11,6 +11,7 @@ import {
   Link,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useHistory } from 'react-router-dom';
 
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
@@ -28,6 +29,19 @@ const AuthForm = (props) => {
     margin: '8px 0',
   };
 
+  //added to redirect to profile page once user logged in
+  const history = useHistory();
+
+  const handleSubmitProfile = (evt) => {
+    console.log('starting dispatch');
+    //wont run until the promise is resolved
+    handleSubmit(evt).then(() => {
+      console.log('then go to profile');
+      let path = '/profile';
+      history.push(path);
+    });
+  };
+
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
@@ -37,7 +51,7 @@ const AuthForm = (props) => {
           </Avatar>
           <h2>Sign In</h2>
         </Grid>
-        <form onSubmit={handleSubmit} name={name}>
+        <form onSubmit={handleSubmitProfile} name={name}>
           <div>
             <label htmlFor="email"></label>
             <input
@@ -84,7 +98,7 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(email, password, formName));
+      return dispatch(authenticate(email, password, formName));
     },
   };
 };

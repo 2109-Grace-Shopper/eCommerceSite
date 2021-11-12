@@ -18,7 +18,7 @@ const Navbar = (props) => {
           About
         </Link>
         {props.isLoggedIn ? (
-          <Link to="#" className="navLink">
+          <Link to="/profile" className="navLink">
             Profile
           </Link>
         ) : (
