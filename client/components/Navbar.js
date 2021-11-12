@@ -18,7 +18,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         About
       </Link>
       {isLoggedIn ? (
-        <Link to="#" className="navLink">
+        <Link to="/profile" className="navLink">
           Profile
         </Link>
       ) : (

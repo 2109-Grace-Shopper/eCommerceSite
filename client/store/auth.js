@@ -75,7 +75,9 @@ export const logout = () => {
  */
 export default function(state = {}, action) {
   switch (action.type) {
-    case SET_AUTH:
+    case SET_AUTH: 
+     console.log('in here', action.auth)
+      console.log(action.auth)
       return action.auth
     case SIGN_UP:
     return action.signup

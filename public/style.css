@@ -72,3 +72,14 @@ input:focus {
 .signup__link:hover{
   color: darken(#999, 13%)
 }
+
+/* Profile page */
+.MuiBox-root-1{
+  padding:100px;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.profileimage{
+  align-items: center;
+}
