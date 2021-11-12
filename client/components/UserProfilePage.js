@@ -5,38 +5,29 @@ import { Grid, Paper, Avatar, Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { Label } from '@material-ui/icons';
 //import '../../public/style.css'
+import {logout} from '../store'
 
 /**
  * COMPONENT
  */
-export class ProfilePage extends React.Component {
-  componentDidMount() {
-    console.log('in component did mount');
-    console.log('checking', this.props.loggedinuser);
-    //this.props.fetchSingleUser(this.props.loggedinuser.id) keep this to access more profile info based on id
-  }
-
-  constructor() {
-    super();
-  }
-
-  render() {
+const ProfilePage = (props) => {
+  console.log(props)
     return (
       <Box>
         <Paper elevation={10}>
           <h4>
-            Hello, {this.props.loggedinuser.firstName}&nbsp;
-            <span class="wave">👋 </span>
+            Hello, {props.loggedinuser.firstName}&nbsp;
+            <span className="wave">👋 </span>
           </h4>
           <img
-            src={this.props.loggedinuser.avatar}
+            src={props.loggedinuser.avatar}
             style={{ width: '100px', height: '100px' }}
           />
           <h4>
-            Name: {this.props.loggedinuser.firstName}{' '}
-            {this.props.loggedinuser.lastName}{' '}
+            Name: {props.loggedinuser.firstName}{' '}
+            {props.loggedinuser.lastName}{' '}
           </h4>
-          <h4>Email: {this.props.loggedinuser.email}</h4>
+          <h4>Email: {props.loggedinuser.email}</h4>
           <Button>
             <h4 className={'profilebuttonlabel'}>Edit Profile</h4>
           </Button>
@@ -46,14 +37,13 @@ export class ProfilePage extends React.Component {
           <Button>
             <h4 className={'profilebuttonlabel'}>My Cart</h4>
           </Button>
-          <Button>
+          <Button onClick={props.handleClick()}>
             <h4 className={'profilebuttonlabel'}>Log Out</h4>
           </Button>
         </Paper>
       </Box>
     );
   }
-}
 
 function mapStateToProps(state) {
   return {
@@ -61,8 +51,13 @@ function mapStateToProps(state) {
     //leveraged the auth which uses findByToken to get the profile data
   };
 }
-// const mapDispatch = (dispatch) => ({
-//   fetchSingleUser: (id) => dispatch(fetchSingleUser(id))
-// })
 
-export const Profile = connect(mapStateToProps)(ProfilePage);
+const mapDispatch = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout())
+    }
+  }
+}
+
+export const Profile = connect(mapStateToProps, mapDispatch)(ProfilePage);
