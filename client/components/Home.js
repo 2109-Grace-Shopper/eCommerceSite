@@ -8,18 +8,36 @@ import { Container, Grid, Item } from '@mui/material';
  * COMPONENT
  */
 export const Home = (props) => {
-  const { firstName } = props
+  const { firstName } = props;
 
   return (
-    <Container maxWidth="xl" justify = "center" className="home">
+    <Container maxWidth="xl" justify="center" className="home">
       <Grid container spacing={2}>
-        <Grid item xs={4} >
-          <h1>Give Yourself <br />A New Way to Buy!</h1>
-          <p>Welcome {firstName} to Pierre's General Store!<br />Our new eCommerce store is online, try the new features in our website, you will be pleasantly surprised. Fall season items are available now!</p>
-          <Button endIcon={<ArrowRightAltIcon />} href="/allProducts" variant="contained">Explore now </Button>
+        <Grid item xs={4}>
+          <h1>
+            Give Yourself <br />A New Way to Buy!
+          </h1>
+          <p>
+            Welcome {firstName} to Pierre's General Store!
+            <br />
+            Our new eCommerce store is online, try the new features in our
+            website, you will be pleasantly surprised. Fall season items are
+            available now!
+          </p>
+          <Button
+            endIcon={<ArrowRightAltIcon />}
+            href="/products"
+            variant="contained"
+          >
+            Explore now{' '}
+          </Button>
         </Grid>
         <Grid item xs={8}>
-          <img className="stardew" src="home/StardewValley.png" alt="Stardew Valley"/>
+          <img
+            className="stardew"
+            src="home/StardewValley.png"
+            alt="Stardew Valley"
+          />
         </Grid>
       </Grid>
     </Container>
