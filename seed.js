@@ -1,6 +1,6 @@
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Order, OrderLine },
 } = require('./server/db');
 
 const users = [

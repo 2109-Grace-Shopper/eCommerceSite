@@ -92,13 +92,48 @@ form div {
   padding-top: 10px;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+#product_description{
+  border-bottom: 3px solid #A2D2FF;
+  font-size: 3em;
+  transition: all 0.25s linear;
+  position: relative;
+}
+
+#product_description:before{
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #B2F9FC;
+  position: absolute;
+  left: 0;
+  bottom: -3px; 
+  transform-origin: left; 
+  transform: scale(0);
+  transition: 0.25s linear;
+}
+
+#product_description:hover:before {
+  transform: scale(1);
+}
+
 /* Single Product Styles */
 .singleProductDiv {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
-  padding-top: 1rem;
+  padding-top: 2rem;
+  background-color: #E4FBFF;
+  padding-bottom: 2%;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 5%;
 }
 
 .singleProductDesc {
@@ -108,6 +143,11 @@ form div {
 .inputQty {
   margin-right: 1rem;
 }
+
+.single_product_form{
+  text-align: center;
+}
+
 
 /* Sign up and Login page */
 input {
@@ -168,4 +208,17 @@ input:focus {
   color: #2840c7;
   padding: 2px;
   margin: 2px;
+}
+
+/* confirmation page */
+#confirm_icon{
+  transform: scale(3);
+  margin-top: 5%;
+  margin-bottom: 5px;
+  color: #105652;
+  transition: color 0.5s ease-in 0.3s;
+}
+
+.confirm_img{
+  transform: scale(0.7);
 }

@@ -26,7 +26,7 @@ const Navbar = (props) => {
             Login
           </Link>
         )}
-        <Link to="#" className="navLink">
+        <Link to="/cart" className="navLink">
           <ShoppingCartIcon fontSize="middle" />
         </Link>
       </nav>

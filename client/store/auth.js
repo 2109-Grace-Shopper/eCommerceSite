@@ -63,6 +63,7 @@ export const signup =
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(signup_me());
+      history.push("/")
     } catch (authError) {
       return dispatch(signUp({ error: authError }));
     }
