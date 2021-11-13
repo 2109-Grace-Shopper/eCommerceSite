@@ -92,28 +92,28 @@ form div {
   padding-top: 10px;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-#product_description{
-  border-bottom: 3px solid #A2D2FF;
+#product_description {
+  border-bottom: 3px solid #a2d2ff;
   font-size: 3em;
   transition: all 0.25s linear;
   position: relative;
 }
 
-#product_description:before{
-  content: "";
+#product_description:before {
+  content: '';
   display: block;
   width: 100%;
   height: 3px;
-  background-color: #B2F9FC;
+  background-color: #b2f9fc;
   position: absolute;
   left: 0;
-  bottom: -3px; 
-  transform-origin: left; 
+  bottom: -3px;
+  transform-origin: left;
   transform: scale(0);
   transition: 0.25s linear;
 }
@@ -129,7 +129,7 @@ a{
   flex-wrap: wrap;
   flex-direction: column;
   padding-top: 2rem;
-  background-color: #E4FBFF;
+  background-color: #e4fbff;
   padding-bottom: 2%;
   width: 70%;
   margin-left: 15%;
@@ -144,10 +144,9 @@ a{
   margin-right: 1rem;
 }
 
-.single_product_form{
+.single_product_form {
   text-align: center;
 }
-
 
 /* Sign up and Login page */
 input {
@@ -211,7 +210,7 @@ input:focus {
 }
 
 /* confirmation page */
-#confirm_icon{
+#confirm_icon {
   transform: scale(3);
   margin-top: 5%;
   margin-bottom: 5px;
@@ -219,6 +218,6 @@ input:focus {
   transition: color 0.5s ease-in 0.3s;
 }
 
-.confirm_img{
+.confirm_img {
   transform: scale(0.7);
 }
