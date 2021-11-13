@@ -11,7 +11,7 @@ export const Home = (props) => {
   const { firstName } = props;
 
   return (
-    <Container maxWidth="xl" justify="center" className="home">
+    <Container justify="center" className="home">
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <h1>

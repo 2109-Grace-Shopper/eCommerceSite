@@ -9,6 +9,8 @@ import { Signup } from './components/SignUp';
 import { Profile } from './components/UserProfilePage';
 import { me } from './store';
 import About from './components/About';
+import Confirm from './components/ConfirmPage';
+import Cart from './components/Cart'
 
 class Routes extends Component {
   componentDidMount() {
@@ -28,6 +30,8 @@ class Routes extends Component {
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/confirm" component={Confirm} />
+          <Route exact path="/cart" component={Cart} />
         </Switch>
       </div>
     );

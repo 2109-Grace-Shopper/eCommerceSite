@@ -4,14 +4,12 @@ import axios from 'axios'
 const GOT_PRODUCT = "GOT_PRODUCT";
 
 //action creator
-
 const setProduct = (product)=> ({
     type: GOT_PRODUCT,
     product
 })
 
 //thunk
-
 export const fetchProduct = (productId) => {
     return async (dispatch) => {
         try{
@@ -25,7 +23,6 @@ export const fetchProduct = (productId) => {
 }
 
 //reducer
-
 export default function singleProductReducer(state = {}, action){
     switch(action.type){
         case GOT_PRODUCT:

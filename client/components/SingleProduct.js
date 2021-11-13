@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
-import { Paper } from '@material-ui/core';
 import Button from '@mui/material/Button';
 
 /**
@@ -42,17 +41,16 @@ class SingleProduct extends React.Component {
     console.log(this.props, 'this is props');
     console.log(this.state, "this is the state")
     return (
-      <Paper elevation={10}>
         <div className="singleProductDiv">
           <img
             src={product.imageUrl}
-            style={{ width: '200px', height: '200px' }}
+            style={{ width: '150px', height: '150px' }}
           />
           <h1>{product.name}</h1>
           <h2>{product.category}</h2>
           <h2>
             <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />
-            {product.price}g
+             {product.price}g
           </h2>
           <h2 className="singleProductDesc">{product.description}</h2>
 
@@ -63,8 +61,8 @@ class SingleProduct extends React.Component {
             id="selectQty"
             value={this.state.qty}
             /> */}
-            <form onSubmit={this.handleSubmit}>
-              <label htmlFor="qty" >Quantity:</label>
+            <form className="single_product_form" onSubmit={this.handleSubmit}>
+              <label htmlFor="qty" >Quantity</label>
               <input
                 type="number"
                 name="qty"
@@ -78,7 +76,6 @@ class SingleProduct extends React.Component {
               <Button variant="contained"> Add to Cart</Button> 
             </form>
         </div>
-      </Paper>
     );
   }
 }
