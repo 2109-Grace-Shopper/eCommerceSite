@@ -25,11 +25,11 @@ Order.belongsTo(Payment);
 Order.belongsToMany(Product, { through: OrderLine });
 Product.belongsToMany(Order, { through: OrderLine });
 
-// Order.hasMany(OrderLine);
-// OrderLine.belongsTo(Order);
+Order.hasMany(OrderLine);
+OrderLine.belongsTo(Order);
 
-// Product.hasMany(OrderLine);
-// OrderLine.belongsTo(Product);
+Product.hasMany(OrderLine);
+OrderLine.belongsTo(Product);
 
 module.exports = {
   db,
