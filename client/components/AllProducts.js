@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProducts } from '../store/allProducts';
+import { addItem } from '../store/order';
 import {
   Card,
   Grid,
@@ -10,7 +11,6 @@ import {
   MenuItem,
   InputLabel,
 } from '@mui/material';
-import { addItem } from '../store/order';
 
 class AllProducts extends React.Component {
   constructor() {
@@ -71,11 +71,7 @@ class AllProducts extends React.Component {
         <div className="productsContainer">
           {products.length === 0 && <h1>No products to display!</h1>}
           {products.map((product) => (
-            <Card
-              key={product.id}
-              sx={{ width: 275, margin: 3 }}
-              onClick={() => this.handleSubmit(product)}
-            >
+            <Card key={product.id} sx={{ width: 275, margin: 3 }}>
               <Grid
                 container
                 direction="column"
@@ -89,7 +85,11 @@ class AllProducts extends React.Component {
                 </Link>
                 <img src={product.imageUrl} width="75px" height="75px" />
                 <h3>Price: {product.price}g</h3>
-                <Button variant="contained" sx={{ margin: 2 }}>
+                <Button
+                  variant="contained"
+                  sx={{ margin: 2 }}
+                  onClick={() => this.handleSubmit(product)}
+                >
                   Add to Cart
                 </Button>
               </Grid>

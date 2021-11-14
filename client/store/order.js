@@ -78,9 +78,21 @@ export default function orderReducer(state = [], action) {
     case SET_ITEMS:
       return action.items;
     case ADD_ITEM:
-      return [...state, action.item];
+      if (
+        state.filter((item) => item.productId === action.item.productId)
+          .length > 0
+      ) {
+        return state.map((item) => {
+          if (item.productId === action.item.productId) {
+            item.quantity = action.item.quantity;
+          }
+          return item;
+        });
+      } else {
+        return [...state, action.item];
+      }
     case REMOVE_ITEM:
-      return state.filter((item) => item.id !== action.item.id);
+      return state.filter((item) => item.productId !== action.item.productId);
     default:
       return state;
   }

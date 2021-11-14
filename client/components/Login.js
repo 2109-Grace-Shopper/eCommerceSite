@@ -33,12 +33,10 @@ const AuthForm = (props) => {
   const history = useHistory();
 
   const handleSubmitProfile = (evt) => {
-    console.log('starting dispatch');
-    //wont run until the promise is resolved
     handleSubmit(evt).then(() => {
-      console.log('then go to profile');
       let path = '/profile';
       history.push(path);
+      window.location.reload();
     });
   };
 
