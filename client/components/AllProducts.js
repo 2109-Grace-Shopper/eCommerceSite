@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProducts } from '../store/allProducts';
+import { addItem, fetchItems } from '../store/order';
 import {
   Card,
   Grid,
@@ -36,9 +37,8 @@ class AllProducts extends React.Component {
     }
   }
 
-  handleSubmit(product) {
-    // Will have to change this later after adding cart functionality
-    console.log(`${product.name} (cost ${product.price}g) added to cart`);
+  handleSubmit(productId) {
+    this.props.addItem(productId, 1);
   }
 
   componentDidMount() {
@@ -47,6 +47,7 @@ class AllProducts extends React.Component {
 
   render() {
     const products = this.filterProducts();
+    // const userId = this.props.user.id; 
     return (
       <div>
         <div className="filter">
@@ -72,7 +73,7 @@ class AllProducts extends React.Component {
             <Card
               key={product.id}
               sx={{ width: 275, margin: 3 }}
-              onClick={() => this.handleSubmit(product)}
+              className="btn btn-md btn-info" onClick={() => this.handleSubmit(product.id)}
             >
               <Grid
                 container
@@ -99,13 +100,15 @@ class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
-    products: state.products,
+    user: state.user,
+    products: state.products
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
+    addItem: (productId, quantity) => dispatch(addItem(productId, quantity)),
   };
 };
 

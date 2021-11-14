@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { AddShoppingCart } from "@material-ui/icons";
+import { Badge } from "@material-ui/core";
+import { fetchItems } from '../store/order';
 
 const Navbar = (props) => {
   return (
@@ -27,7 +29,9 @@ const Navbar = (props) => {
           </Link>
         )}
         <Link to="/cart" className="navLink">
-          <ShoppingCartIcon fontSize="medium" />
+          <Badge badgeContent={10} color="error">
+            <AddShoppingCart />
+          </Badge> 
         </Link>
       </nav>
     </div>
@@ -40,4 +44,10 @@ const mapState = (state) => {
   };
 };
 
-export default connect(mapState)(Navbar);
+const mapDispatch = (dispatch) => {
+  return {
+    fetchItems:() => dispatch(fetchItems()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Navbar);

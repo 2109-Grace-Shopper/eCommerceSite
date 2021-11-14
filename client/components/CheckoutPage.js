@@ -1,16 +1,33 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import {Typography, Divider, Button } from '@material-ui/core';
 /**
  * COMPONENT
  */
-export const Checkout = props => {
-  const {username} = props
+export const CheckoutPage = props => {
+  const {firstName, lastName} = props
 
   return (
-    <div>
-      <h3></h3>
-    </div>
+    <>
+      <Review checkoutToken={checkoutToken} />
+      <Divider />
+      <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>Payment method</Typography>
+      <Elements stripe={stripePromise}>
+        <ElementsConsumer>{({ elements, stripe }) => (
+          <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+            <CardElement />
+            <br /> <br />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Button variant="outlined" onClick={backStep}>Back</Button>
+              <Button type="submit" variant="contained" disabled={!stripe} color="primary">
+                Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+              </Button>
+            </div>
+          </form>
+        )}
+        </ElementsConsumer>
+      </Elements>
+    </>
   )
 }
 
@@ -18,7 +35,10 @@ export const Checkout = props => {
  * CONTAINER
  */
 const mapState = state => {
-  
+  return {
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName
+  };
 }
 
-export default connect(mapState)(Checkout)
+export default connect(mapState)(CheckoutPage)
