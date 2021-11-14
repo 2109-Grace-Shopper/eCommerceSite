@@ -49,11 +49,11 @@ export const fetchItems = () => {
 export const addItem = (productId, quantity) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('/api/order', {
-        headers: { authorization: token },
-        productId,
-        quantity,
-      });
+      const { data } = await axios.post(
+        '/api/order',
+        { productId, quantity },
+        header
+      );
       dispatch(_addItem(data));
     } catch (error) {
       console.log(error);
@@ -64,10 +64,7 @@ export const addItem = (productId, quantity) => {
 export const removeItem = (productId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete('/api/order', {
-        headers: { authorization: token },
-        productId,
-      });
+      const { data } = await axios.delete('/api/order', { productId }, header);
       dispatch(_removeItem(data));
     } catch (error) {
       console.log(error);

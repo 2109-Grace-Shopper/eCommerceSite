@@ -10,6 +10,7 @@ import {
   MenuItem,
   InputLabel,
 } from '@mui/material';
+import { addItem } from '../store/order';
 
 class AllProducts extends React.Component {
   constructor() {
@@ -38,6 +39,7 @@ class AllProducts extends React.Component {
 
   handleSubmit(product) {
     // Will have to change this later after adding cart functionality
+    this.props.addItem(product.id, 1);
     console.log(`${product.name} (cost ${product.price}g) added to cart`);
   }
 
@@ -81,7 +83,9 @@ class AllProducts extends React.Component {
                 alignItems="center"
               >
                 <Link to={`/products/${product.id}`}>
-                  <h3 id="product_description" style={{ fontSize: 20 }}>{product.name}</h3>
+                  <h3 id="product_description" style={{ fontSize: 20 }}>
+                    {product.name}
+                  </h3>
                 </Link>
                 <img src={product.imageUrl} width="75px" height="75px" />
                 <h3>Price: {product.price}g</h3>
@@ -106,6 +110,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
+    addItem: (productId, quantity) => dispatch(addItem(productId, quantity)),
   };
 };
 

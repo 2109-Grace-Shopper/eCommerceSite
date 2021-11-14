@@ -65,7 +65,10 @@ router.get('/', async function (req, res, next) {
 router.post('/', async function (req, res, next) {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    const order = await findOrder(user.id);
+    let order = await findOrder(user.id);
+    if (!order) {
+      order = await Order.create({ userId: user.id });
+    }
     const newOrderLine = await OrderLine.create({
       orderId: order.id,
       productId: req.body.productId,
