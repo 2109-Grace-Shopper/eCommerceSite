@@ -82,11 +82,8 @@ router.post('/', async function (req, res, next) {
     let order = await findOrder(user.id);
     //references the findProduct to get the productId
     let product_value = await findProduct(req.body.productId)
-    console.log(product_value)
-    console.log(req.body.productId)
     //takes the product_value and multiplys the price by quantity while converting to num
     let subTotal = Number(product_value.price) * Number(req.body.quantity)
-    console.log(subTotal)
     //////-------------------------------------------
     if (!order) {
       order = await Order.create({ userId: user.id });
@@ -105,7 +102,7 @@ router.post('/', async function (req, res, next) {
       res.send(
         await orderLine.update({
           quantity: Number(orderLine.quantity) + Number(req.body.quantity), 
-          subTotal: subTotal
+          subTotal: subTotal + Number(orderLine.subTotal) //added subTotal
         })
       );
     }
