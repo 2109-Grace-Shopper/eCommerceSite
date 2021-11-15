@@ -59,7 +59,7 @@ export const addItem = (productId, quantity) => {
     try {
       const { data } = await axios.post(
         '/api/order',
-        { productId, quantity }, header
+        {productId, quantity}, header
       );
       dispatch(_addItem(data));
     } catch (error) {
@@ -82,7 +82,14 @@ export const updateItem = (productId, quantity) => {
 export const removeItem = (productId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete('/api/order', { productId }, header);
+      const {data} = await axios.delete('/api/order', {
+        headers: {
+          Authorization: token
+        },
+        data: {
+          productId: productId
+        }
+      });
       dispatch(_removeItem(data));
     } catch (error) {
       console.log(error);

@@ -8,50 +8,35 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
  * COMPONENT
  */
  class Cart extends React.Component {
-    constructor(props) {
-      super(props);
+    constructor() {
+      super();
       this.state = {
-        qty: 1
+        items: []
       }
-      this.handleSubmit = this.handleSubmit.bind(this)
-      this.qtyChangeHandler = this.qtyChangeHandler.bind(this)
-      this.removeFromCartHandler = this.removeFromCartHandler.bind(this)
       this.getCartCount = this.getCartCount.bind(this)
       this.getCartTotal = this.getCartTotal.bind(this)
     }
   
-    componentDidMount() {
-      this.props.fetchItems();
-    }
-
-    qtyChangeHandler(event) {
+    async componentDidMount() {
+      await this.props.fetchItems();
       this.setState({
-        [event.target.name]: event.target.value,
-      });
-    }
-
-    handleSubmit(id, event) {
-      event.preventDefault();
-      this.props.updateItem(id, this.state.qty);
-    }
-  
-    removeFromCartHandler(id) {
-      this.props.removeItem(id)
+        items: this.props.items
+      })
     }
 
     getCartCount(cartItems){
-        return cartItems.reduce((quantity, item) => Number(item.quantity) + quantity, 0);
+      return cartItems.reduce((quantity, item) => Number(item.quantity) + quantity, 0);
     }
 
     getCartTotal (cartItems){
-        return cartItems
-          .reduce((subTotal, item) => subTotal+item.subTotal, 0);
-      };
+      return cartItems
+        .reduce((subTotal, item) => subTotal+item.subTotal, 0);
+    };
   
     render() {
-      const cartItems = this.props.items;
+      const cartItems = this.state.items;
       console.log(cartItems)
-
+      
       return (
         <>
         <div className="cartscreen">
@@ -59,7 +44,9 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
             <h2>Shopping Cart</h2>
             {cartItems.length === 0 ? (
               <div>
-                Your Cart Is Empty <Link to="/products">Go Back</Link>
+                Your Cart Is Empty 
+                <br/>
+                <Link to="/products">Go Back</Link>
               </div>
             ) : (
               <div>
@@ -84,9 +71,6 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
                 <CartItem
                   key={item.productId}
                   item={item}
-                  qtyChangeHandler={this.qtyChangeHandler}
-                  removeHandler={this.removeFromCartHandler}
-                  handleSubmit={this.handleSubmit}
                 />
               ))}
               </div>
@@ -96,21 +80,21 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
           <div className="cartscreen__right">
             <div className="cartscreen__info">
               <div>
-              <p> {this.getCartCount(cartItems)} items</p>
+                <p>{this.getCartCount(cartItems)} items</p>
               </div>
               {cartItems.map((item) => (
                 <div id="cart_subtotal">
-                <p>{item.product.name}</p>
-                <p>subTotal: ${item.subTotal}</p>
+                  <p>{item.product.name}</p>
+                  <p>{item.subTotal}g</p>
                 </div>
               ))}
               <div id="cart_total">
-              <p>Total: ${this.getCartTotal(cartItems)}</p>
+              <p>Total: {this.getCartTotal(cartItems)}g</p>
               </div>
             </div>
             <div>
               <Link to="/checkout">
-              <button>Proceed To Checkout</button>
+                <button>Proceed To Checkout</button>
               </Link>
             </div>
           </div>
@@ -129,8 +113,6 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
   
   const mapDispatch = (dispatch) => ({
     fetchItems: () => dispatch(fetchItems()),
-    removeItem: (id) => dispatch(removeItem(id)),
-    updateItem:(id, quantity) => dispatch(updateItem(id, quantity))
   });
   
   export default connect(mapState, mapDispatch)(Cart);
