@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Product, User, Order, OrderLine },
+  models: { User, Product, Order, OrderLine },
 } = require('../db');
 module.exports = router;
 
@@ -17,6 +17,7 @@ async function findOrder(userId) {
     console.log(error);
   }
 }
+
 
 async function findOrderLines(orderId) {
   try {
@@ -45,6 +46,19 @@ async function findOneOrderLine(orderId, productId) {
     console.log(error);
   }
 }
+//finds the productId---------------------
+async function findProduct(productId) {
+  try {
+    const product = await Product.findAll({
+      where: {
+        id: productId
+      },
+    });
+    return product[0];
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 //GET api/order --- this gets all the products in the order
 router.get('/', async function (req, res, next) {
@@ -66,22 +80,32 @@ router.post('/', async function (req, res, next) {
   try {
     const user = await User.findByToken(req.headers.authorization);
     let order = await findOrder(user.id);
+    //references the findProduct to get the productId
+    let product_value = await findProduct(req.body.productId)
+    console.log(product_value)
+    console.log(req.body.productId)
+    //takes the product_value and multiplys the price by quantity while converting to num
+    let subTotal = Number(product_value.price) * Number(req.body.quantity)
+    console.log(subTotal)
+    //////-------------------------------------------
     if (!order) {
       order = await Order.create({ userId: user.id });
     }
     let orderLine = await OrderLine.findOne({
-      where: { orderId: order.id, productId: req.body.productId },
+      where: { orderId: order.id, productId: req.body.productId},
     });
     if (!orderLine) {
       orderLine = await OrderLine.create({
         orderId: order.id,
         productId: req.body.productId,
         quantity: req.body.quantity,
+        subTotal: subTotal //added subTotal
       });
     } else {
       res.send(
         await orderLine.update({
-          quantity: Number(orderLine.quantity) + Number(req.body.quantity),
+          quantity: Number(orderLine.quantity) + Number(req.body.quantity), 
+          subTotal: subTotal
         })
       );
     }
