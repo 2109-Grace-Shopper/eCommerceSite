@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProducts } from '../store/allProducts';
-import { addItem, fetchItems } from '../store/order';
+import { addItem } from '../store/order';
 import {
   Card,
   Grid,
@@ -37,8 +37,10 @@ class AllProducts extends React.Component {
     }
   }
 
-  handleSubmit(productId) {
-    this.props.addItem(productId, 1);
+  handleSubmit(product) {
+    // Will have to change this later after adding cart functionality
+    this.props.addItem(product.id, 1);
+    console.log(`${product.name} (cost ${product.price}g) added to cart`);
   }
 
   componentDidMount() {
@@ -70,11 +72,7 @@ class AllProducts extends React.Component {
         <div className="productsContainer">
           {products.length === 0 && <h1>No products to display!</h1>}
           {products.map((product) => (
-            <Card
-              key={product.id}
-              sx={{ width: 275, margin: 3 }}
-              className="btn btn-md btn-info" onClick={() => this.handleSubmit(product.id)}
-            >
+            <Card key={product.id} sx={{ width: 275, margin: 3 }}>
               <Grid
                 container
                 direction="column"
@@ -82,11 +80,17 @@ class AllProducts extends React.Component {
                 alignItems="center"
               >
                 <Link to={`/products/${product.id}`}>
-                  <h3 id="product_description" style={{ fontSize: 20 }}>{product.name}</h3>
+                  <h3 id="product_description" style={{ fontSize: 20 }}>
+                    {product.name}
+                  </h3>
                 </Link>
                 <img src={product.imageUrl} width="75px" height="75px" />
                 <h3>Price: {product.price}g</h3>
-                <Button variant="contained" sx={{ margin: 2 }}>
+                <Button
+                  variant="contained"
+                  sx={{ margin: 2 }}
+                  onClick={() => this.handleSubmit(product)}
+                >
                   Add to Cart
                 </Button>
               </Grid>

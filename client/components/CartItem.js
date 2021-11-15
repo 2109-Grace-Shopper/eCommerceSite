@@ -1,25 +1,40 @@
 import { Link } from "react-router-dom";
 import React from 'react';
 import { connect } from 'react-redux';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
-const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
+const CartItem = (props) => {
+  const {item, qtyChangeHandler, handleSubmit, removeHandler} = props;
+
   return (
-    <div >
-      <div >
-        <img src={item.imageUrl} alt={item.name} />
+    <div className="cartitem">
+      <div className="cartitem__image">
+        <img src={item.product.imageUrl} alt={item.product.name} />
       </div>
-      <Link to={`/product/${item.id}`}>
-        <p>{item.name}</p>
+      <Link to={`/products/${item.productId}`} className="cartItem__name">
+        <p>{item.product.name}</p>
       </Link>
-      <p>${item.price}</p>
-      <select
-        value={item.qty}
-        onChange={(e) => qtyChangeHandler(item.id, e.target.value)}
-      >
-      </select>
-      <button onClick={() => removeHandler(item.id)}>
-        <DeleteForeverIcon/>
+      <p className="cartitem__price">${item.product.price}</p>
+      <form className="cartItem__select" onSubmit= {(e) => handleSubmit(item.productId, e)}>
+          <label htmlFor="quantity"></label>
+          <input
+          id="cart_input"
+            type="number"
+            name="quantity"
+            onChange={(e)=>qtyChangeHandler(e)}
+            min="1"
+            max="999"
+            step="1"
+            placeholder={item.quantity}
+            value={props.qty}
+          />
+          <Button size="small" variant="contained" type="submit">
+            update
+          </Button>
+        </form>
+      <button className="cartItem__deleteBtn" onClick={() => removeHandler(item.productId)}>
+        <DeleteIcon/>
       </button>
     </div>
   );

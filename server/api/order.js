@@ -67,14 +67,25 @@ router.post('/', async function (req, res, next) {
     const user = await User.findByToken(req.headers.authorization);
     let order = await findOrder(user.id);
     if (!order) {
-        order = await Order.create({ userId: user.id });
+      order = await Order.create({ userId: user.id });
     }
-    const newOrderLine = await OrderLine.create({
-      orderId: order.id,
-      productId: req.body.productId,
-      quantity: req.body.quantity,
+    let orderLine = await OrderLine.findOne({
+      where: { orderId: order.id, productId: req.body.productId },
     });
-    res.send(newOrderLine);
+    if (!orderLine) {
+      orderLine = await OrderLine.create({
+        orderId: order.id,
+        productId: req.body.productId,
+        quantity: req.body.quantity,
+      });
+    } else {
+      res.send(
+        await orderLine.update({
+          quantity: Number(orderLine.quantity) + Number(req.body.quantity),
+        })
+      );
+    }
+    res.send(orderLine);
   } catch (error) {
     next(error);
   }

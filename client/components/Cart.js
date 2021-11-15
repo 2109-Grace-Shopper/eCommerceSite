@@ -2,115 +2,120 @@ import { Link } from "react-router-dom";
 import React from 'react';
 import { connect } from 'react-redux';
 import CartItem from "./CartItem";
-import {fetchItems, addItem, removeItem} from '../store/order'
+import {fetchItems, updateItem, removeItem} from '../store/order'
 
 /**
  * COMPONENT
  */
  class Cart extends React.Component {
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       this.state = {
-        quantity: 1
+        qty: 1
       }
+      this.handleSubmit = this.handleSubmit.bind(this)
       this.qtyChangeHandler = this.qtyChangeHandler.bind(this)
       this.removeFromCartHandler = this.removeFromCartHandler.bind(this)
       this.getCartCount = this.getCartCount.bind(this)
-      this.getCartSubTotal = this.getCartSubTotal.bind(this)
+      this.getCartTotal = this.getCartTotal.bind(this)
     }
   
     componentDidMount() {
-        fetchItems();
-        console.log(this.props.fetchItems());
+      this.props.fetchItems();
     }
-  
-    qtyChangeHandler(id, quantity) {
-        addItem(id, quantity);
-        this.setState({
-          quantity
-        })
+
+    qtyChangeHandler(event) {
+      this.setState({
+        [event.target.name]: event.target.value,
+      });
+    }
+
+    handleSubmit(id, event) {
+      event.preventDefault();
+      this.props.updateItem(id, this.state.qty);
     }
   
     removeFromCartHandler(id) {
-        removeItem(id)
+      this.props.removeItem(id)
     }
 
     getCartCount(cartItems){
         return cartItems.reduce((quantity, item) => Number(item.quantity) + quantity, 0);
     }
 
-    getCartSubTotal (cartItems){
+    getCartTotal (cartItems){
         return cartItems
-          .reduce((price, item) => price + item.price * item.quantity, 0);
+          .reduce((subTotal, item) => subTotal+item.subTotal, 0);
       };
   
     render() {
-      // const cartItems = this.props.cartItems;
-      // console.log(cartItems)
-
-      const cartItems = [
-        {
-          id: 1,
-          quantity: 5,
-          name: 'Artichoke Seeds',
-          category: 'seeds',
-          price: 30,
-          description: 'Plant these in the fall. Takes 8 days to mature.',
-          imageUrl:
-            'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/products/Artichoke_Seeds.png',
-        },
-        {
-          id: 2,
-          quantity: 5,
-          name: 'Jack-O-Lantern',
-          category: 'seasonal decor',
-          price: 750,
-          description: 'A whimsical fall decoration.',
-          imageUrl:
-            'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/products/Jack-O-Lantern.png',
-        },
-        {
-          id: 3,
-          quantity: 5,
-          name: 'Rarecrow 2',
-          category: 'seasonal decor',
-          price: 5000,
-          description: 'One of 8 special scarecrows. Collect them all!',
-          imageUrl:
-            'https://raw.githubusercontent.com/2109-Grace-Shopper/eCommerceSite/main/public/products/36px-Rarecrow_2.png',
-        }
-      ]
+      const cartItems = this.props.items;
+      console.log(cartItems)
 
       return (
-        <div >
-          <div >
+        <>
+        <div className="cartscreen">
+          <div className="cartscreen__left">
             <h2>Shopping Cart</h2>
             {cartItems.length === 0 ? (
               <div>
                 Your Cart Is Empty <Link to="/products">Go Back</Link>
               </div>
             ) : (
-              cartItems.map((item) => (
+              <div>
+                <div className="cartitem" id="cart_title">
+                  <div>
+                      <h3>Product</h3>
+                  </div>
+                  <div>
+                      <h3>Name</h3>
+                  </div>
+                  <div>
+                      <h3>Price</h3>
+                  </div>
+                  <div >
+                      <h3>Quantity</h3>
+                  </div>
+                  <div>
+                      <h3>Delete</h3>
+                  </div>
+              </div>
+              {cartItems.map((item) => (
                 <CartItem
-                  key={item.id}
+                  key={item.productId}
                   item={item}
-                  qtyChangeHandler={this.props.qtyChangeHandler}
-                  removeHandler={this.props.removeFromCartHandler}
+                  qtyChangeHandler={this.qtyChangeHandler}
+                  removeHandler={this.removeFromCartHandler}
+                  handleSubmit={this.handleSubmit}
                 />
-              ))
+              ))}
+              </div>
             )}
           </div>
   
-          <div>
-            <div>
-              <p>Subtotal ({this.getCartCount(cartItems)}) items</p>
-              <p>${this.getCartSubTotal(cartItems)}</p>
+          <div className="cartscreen__right">
+            <div className="cartscreen__info">
+              <div>
+              <p> {this.getCartCount(cartItems)} items</p>
+              </div>
+              {cartItems.map((item) => (
+                <div id="cart_subtotal">
+                <p>{item.product.name}</p>
+                <p>subTotal: ${item.subTotal}</p>
+                </div>
+              ))}
+              <div id="cart_total">
+              <p>Total: ${this.getCartTotal(cartItems)}</p>
+              </div>
             </div>
             <div>
+              <Link to="/checkout">
               <button>Proceed To Checkout</button>
+              </Link>
             </div>
           </div>
         </div>
+        </>
       );
     }
   }
@@ -119,13 +124,13 @@ import {fetchItems, addItem, removeItem} from '../store/order'
    * CONTAINER
    */
   const mapState = (state) => {
-    return { cartItems: state.items };
+    return { items: state.order };
   };
   
   const mapDispatch = (dispatch) => ({
     fetchItems: () => dispatch(fetchItems()),
-    addItem:(id, qty) => dispatch(addItem(id, qty)),
-    removeItem: (id) => dispatch(removeItem(id))
+    removeItem: (id) => dispatch(removeItem(id)),
+    updateItem:(id, quantity) => dispatch(updateItem(id, quantity))
   });
   
   export default connect(mapState, mapDispatch)(Cart);
