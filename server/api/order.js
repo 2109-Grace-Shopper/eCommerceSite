@@ -4,6 +4,8 @@ const {
 } = require('../db');
 module.exports = router;
 
+// HELPER FUNCTIONS:
+// findOrder -- finds a user's active order
 async function findOrder(userId) {
   try {
     const order = await Order.findOne({
@@ -18,7 +20,7 @@ async function findOrder(userId) {
   }
 }
 
-
+// findOrderLines -- finds all items within a specific order
 async function findOrderLines(orderId) {
   try {
     const products = await OrderLine.findAll({
@@ -33,6 +35,7 @@ async function findOrderLines(orderId) {
   }
 }
 
+// findOneOrderLine -- finds one specific item in a specific order
 async function findOneOrderLine(orderId, productId) {
   try {
     const product = await OrderLine.findOne({
@@ -47,28 +50,28 @@ async function findOneOrderLine(orderId, productId) {
     console.log(error);
   }
 }
-//finds the productId---------------------
+
+// findProduct -- finds a specific product
 async function findProduct(productId) {
   try {
-    const product = await Product.findAll({
-      where: {
-        id: productId
-      },
-    });
-    return product[0];
+    const product = await Product.findByPk(productId);
+    return product;
   } catch (error) {
     console.log(error);
   }
 }
 
-//GET api/order --- this gets all the products in the order
+// ROUTES
+// GET api/order --- this gets all the items in the order
 router.get('/', async function (req, res, next) {
   try {
+    // Finds user's order, if it doesn't exist, it creates one
     const user = await User.findByToken(req.headers.authorization);
     let order = await findOrder(user.id);
     if (!order) {
       order = await Order.create({ userId: user.id });
     }
+    // Finds items in specific order and returns them
     const products = await findOrderLines(order.id);
     res.send(products);
   } catch (error) {
@@ -79,35 +82,53 @@ router.get('/', async function (req, res, next) {
 // POST api/order --- this creates a new orderLine
 router.post('/', async function (req, res, next) {
   try {
+    // Finds user's order, if it doesn't exist, it creates one
     const user = await User.findByToken(req.headers.authorization);
     let order = await findOrder(user.id);
-    //references the findProduct to get the productId
-    let product_value = await findProduct(req.body.productId)
-    //takes the product_value and multiplys the price by quantity while converting to num
-    let subTotal = Number(product_value.price) * Number(req.body.quantity)
-    //////-------------------------------------------
     if (!order) {
       order = await Order.create({ userId: user.id });
     }
-    let orderLine = await OrderLine.findOne({
-      where: { orderId: order.id, productId: req.body.productId},
-    });
+    // Calculates subTotal for an item given its quantity
+    const product_value = await findProduct(req.body.productId);
+    const subTotal = Number(product_value.price) * Number(req.body.quantity);
+    // Finds specific OrderLine and updates quantity/subTotal, if it doesn't exist, it creates one
+    let orderLine = await findOneOrderLine(order.id, req.body.productId);
     if (!orderLine) {
       orderLine = await OrderLine.create({
         orderId: order.id,
         productId: req.body.productId,
         quantity: req.body.quantity,
-        subTotal: subTotal //added subTotal
+        subTotal: subTotal,
       });
-      res.send(await findOneOrderLine(order.id, req.body.productId));
     } else {
-      res.send(
-        await orderLine.update({
-          quantity: Number(orderLine.quantity) + Number(req.body.quantity), 
-          subTotal: subTotal + Number(orderLine.subTotal) //added subTotal
-        })
-      );
+      await orderLine.update({
+        quantity: Number(orderLine.quantity) + Number(req.body.quantity),
+        subTotal: subTotal + Number(orderLine.subTotal),
+      });
     }
+    res.send(await findOneOrderLine(order.id, req.body.productId));
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT api/order --- this updates an orderLine
+router.put('/', async function (req, res, next) {
+  try {
+    // Finds user's order
+    const user = await User.findByToken(req.headers.authorization);
+    const order = await findOrder(user.id);
+    // Calculates subTotal for an item given its quantity
+    const product_value = await findProduct(req.body.productId);
+    const subTotal = Number(product_value.price) * Number(req.body.quantity);
+    // Updates an orderLine with new quantity/subTotal
+    const orderLine = await findOneOrderLine(order.id, req.body.productId);
+    res.send(
+      await orderLine.update({
+        quantity: Number(req.body.quantity),
+        subTotal: subTotal,
+      })
+    );
   } catch (error) {
     next(error);
   }
@@ -116,6 +137,7 @@ router.post('/', async function (req, res, next) {
 // DELETE api/order --- this deletes an orderLine
 router.delete('/', async function (req, res, next) {
   try {
+    // Finds specific orderLine in user's order and deletes it
     const user = await User.findByToken(req.headers.authorization);
     const order = await findOrder(user.id);
     const orderLine = await findOneOrderLine(order.id, req.body.productId);

@@ -28,12 +28,12 @@ const _addItem = (item) => {
   };
 };
 
-const _updateItem = (item) =>{
+const _updateItem = (item) => {
   return {
     type: UPDATE_ITEM,
     item,
   };
-}
+};
 
 const _removeItem = (item) => {
   return {
@@ -59,7 +59,8 @@ export const addItem = (productId, quantity) => {
     try {
       const { data } = await axios.post(
         '/api/order',
-        {productId, quantity}, header
+        { productId, quantity },
+        header
       );
       dispatch(_addItem(data));
     } catch (error) {
@@ -71,7 +72,11 @@ export const addItem = (productId, quantity) => {
 export const updateItem = (productId, quantity) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/order', { productId, quantity }, header);
+      const { data } = await axios.put(
+        '/api/order',
+        { productId, quantity },
+        header
+      );
       dispatch(_updateItem(data));
     } catch (error) {
       console.log(error);
@@ -82,13 +87,13 @@ export const updateItem = (productId, quantity) => {
 export const removeItem = (productId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.delete('/api/order', {
+      const { data } = await axios.delete('/api/order', {
         headers: {
-          Authorization: token
+          Authorization: token,
         },
         data: {
-          productId: productId
-        }
+          productId: productId,
+        },
       });
       dispatch(_removeItem(data));
     } catch (error) {
@@ -107,18 +112,16 @@ export default function orderReducer(state = [], action) {
         state.filter((item) => item.productId === action.item.productId)
           .length > 0
       ) {
-        return state.map((item) => {
-          if (item.productId === action.item.productId) {
-            item.quantity = action.item.quantity;
-          }
-          return item;
-        });
+        return state.map((item) =>
+          item.productId === action.item.productId ? action.item : item
+        );
       } else {
         return [...state, action.item];
       }
     case UPDATE_ITEM:
       return state.map((item) =>
-      (item.productId === action.item.productId ? action.item : item));
+        item.productId === action.item.productId ? action.item : item
+      );
     case REMOVE_ITEM:
       return state.filter((item) => item.productId !== action.item.productId);
     default:

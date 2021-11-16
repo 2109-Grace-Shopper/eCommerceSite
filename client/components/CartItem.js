@@ -1,25 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { connect } from 'react-redux';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-import {removeItem} from '../store/order'
+import { updateItem, removeItem } from '../store/order';
 
-class CartItem extends React.Component{
+class CartItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: props.item.quantity
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.qtyChangeHandler = this.qtyChangeHandler.bind(this)
-    this.removeHandler = this.removeHandler.bind(this)
+      quantity: props.item.quantity,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.qtyChangeHandler = this.qtyChangeHandler.bind(this);
+    this.removeHandler = this.removeHandler.bind(this);
   }
 
   handleSubmit(id, event) {
     event.preventDefault();
-    console.log("we updated!", this.state.quantity)
-    // this.props.updateItem(id, this.state.qty);
+    console.log('we updated!', this.state.quantity);
+    this.props.updateItem(id, this.state.quantity);
   }
 
   qtyChangeHandler(event) {
@@ -29,12 +29,12 @@ class CartItem extends React.Component{
   }
 
   removeHandler(productId) {
-    this.props.removeItem(productId)
+    this.props.removeItem(productId);
   }
 
-  render(){
+  render() {
     const item = this.props.item;
-    
+
     return (
       <div className="cartitem">
         <div className="cartitem__image">
@@ -44,34 +44,41 @@ class CartItem extends React.Component{
           <p>{item.product.name}</p>
         </Link>
         <p className="cartitem__price">{item.product.price}g</p>
-        <form className="cartItem__select" onSubmit= {(event) => this.handleSubmit(item.productId, event)}>
-            <label htmlFor="quantity"></label>
-            <input
+        <form
+          className="cartItem__select"
+          onSubmit={(event) => this.handleSubmit(item.productId, event)}
+        >
+          <label htmlFor="quantity"></label>
+          <input
             id="cart_input"
-              type="number"
-              name="quantity"
-              onChange={(event)=>this.qtyChangeHandler(event)}
-              min="1"
-              max="999"
-              step="1"
-              placeholder={item.quantity}
-              value={this.state.quantity}
-            />
-            <Button size="small" variant="contained" type="submit">
-              Update
-            </Button>
+            type="number"
+            name="quantity"
+            onChange={(event) => this.qtyChangeHandler(event)}
+            min="1"
+            max="999"
+            step="1"
+            placeholder={item.quantity}
+            value={this.state.quantity}
+          />
+          <Button size="small" variant="contained" type="submit">
+            Update
+          </Button>
         </form>
-        <button className="cartItem__deleteBtn" onClick={() => this.removeHandler(item.productId)}>
-          <DeleteIcon/>
+        <button
+          className="cartItem__deleteBtn"
+          onClick={() => this.removeHandler(item.productId)}
+        >
+          <DeleteIcon />
         </button>
       </div>
     );
-  };
+  }
 }
 
 const mapDispatch = (dispatch) => ({
   removeItem: (productId) => dispatch(removeItem(productId)),
-  // updateItem:(id, quantity) => dispatch(updateItem(id, quantity))
+  updateItem: (productId, quantity) =>
+    dispatch(updateItem(productId, quantity)),
 });
 
 export default connect(null, mapDispatch)(CartItem);
