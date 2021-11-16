@@ -7,6 +7,8 @@ const header = {
   },
 };
 
+const guestOrder = window.localStorage.getItem("orderId")
+
 // ACTION TYPES:
 const SET_ITEMS = 'SET_ITEMS';
 const ADD_ITEM = 'ADD_ITEM';
@@ -50,70 +52,111 @@ const _clearItems = () => {
 };
 
 // THUNKS
-export const fetchItems = () => {
+export const fetchItems = (orderId) => {
   return async (dispatch) => {
     try {
+      if(token){
       const { data } = await axios.get('/api/order', header); ///here we have the get route for the api order
-      dispatch(_setItems(data));                   ///(continued) and we are attaching the header to identify the specific user to get the specific order
+      dispatch(_setItems(data)); 
+    } else{
+      const { data } = await axios.get('/api/guest', {orderId})
+      console.log(data)
+      dispatch(_setItems(data));
+    }
+                        ///(continued) and we are attaching the header to identify the specific user to get the specific order
     } catch (error) {                             /// then it will set the items with the data it gets back
       console.log(error);
     }
   };
 };
 
-export const addItem = (productId, quantity) => {
+export const addItem = (orderId, productId, quantity) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(   /// this is with the post route
-        '/api/order',                  ///route /// we needed to get the productId and quantity to be able to make a new orderline
-        { productId, quantity },      ///body
-        header                       ///header
-      );
-      dispatch(_addItem(data));
+      if(token){
+        const { data } = await axios.post(   /// this is with the post route
+          '/api/order',                  ///route /// we needed to get the productId and quantity to be able to make a new orderline
+          { productId, quantity },      ///body
+          header                       ///header
+        );
+        console.log("this is hitting logged in user")
+        dispatch(_addItem(data));
+      } else{
+        const { data } = await axios.post('/api/guest', {orderId, productId, quantity})
+        if(guestOrder !== data.orderId){
+          window.localStorage.setItem("orderId", data.orderId)
+        }
+        console.log("this is hitting guest")
+        dispatch(_addItem(data));
+      }
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-export const updateItem = (productId, quantity) => {
+export const updateItem = (orderId, productId, quantity) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(  ///to update we are using a put
-        '/api/order',             ///route 
-        { productId, quantity },  ///body
-        header                    ///header
-      );
-      dispatch(_updateItem(data)); ///then we will update that item in our store
+      if(token){
+        const { data } = await axios.put(  ///to update we are using a put
+          '/api/order',             ///route 
+          { productId, quantity },  ///body
+          header                    ///header
+        );
+        dispatch(_updateItem(data)); ///then we will update that item in our store
+      }else{
+        const { data } = await axios.put('/api/guest', {orderId, productId, quantity});
+        dispatch(_updateItem(data))
+      }
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-export const removeItem = (productId) => {
+export const removeItem = (orderId, productId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete('/api/order', {  /// using delete to remove the item
-        headers: {              ///header
-          Authorization: token, 
-        },
-        data: {
-          productId: productId, ///body
-        },
-      });
-      dispatch(_removeItem(data));  ///removing the item from the store
+      if(token){
+        const { data } = await axios.delete('/api/order', {  /// using delete to remove the item
+          headers: {              ///header
+            Authorization: token, 
+          },
+          data: {
+            productId: productId, ///body
+          },
+        });
+        dispatch(_removeItem(data));  ///removing the item from the store
+      }else{
+        const { data } = await axios.delete('/api/guest', {  
+          data: {
+            orderId: orderId, //may have to change structure?
+            productId: productId, 
+          },
+        });
+        dispatch(_removeItem(data));  ///removing the item from the store
+      }
+      
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-export const clearItems = () => {
+export const clearItems = (orderId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/order/confirm', {}, header);
+      if(token){
+        const { data } = await axios.put('/api/order/confirm', {}, header);
       dispatch(_clearItems());
+      }else{
+        const { data } = await axios.put('/api/guest/confirm', {orderId});
+      dispatch(_clearItems());
+      window.localStorage.setItem("orderId", 0)
+      }
+
+      
     } catch (error) {
       console.log(error);
     }

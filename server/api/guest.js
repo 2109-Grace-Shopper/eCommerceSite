@@ -67,12 +67,9 @@ async function findProduct(productId) {       /// we are finding the product bas
 router.get('/', async function (req, res, next) {       /// Getting the order and getting all the products in that order
   try {
     
-    let order = await findOrder(req.body.orderId); /// find the specific order using the helper function we defined above
-    console.log(order)
-    if (!order) {                         ///we say that if they don't have an active order  
-      order = await Order.create({ orderId: order.id }); ///then we will create an order for them, and by default the status goes to 'in cart'
-    }
+    let order = await Order.findByPk(req.body.orderId); /// find the specific order using the helper function we defined above
     // Finds items in specific order and returns them
+    console.log(order)
     const products = await findOrderLines(order.id);  /// then we find all the products within the order
     res.send(products);                               /// if an order already exists then it will return all the products within that order and send those back
   } catch (error) {
@@ -80,18 +77,17 @@ router.get('/', async function (req, res, next) {       /// Getting the order an
   }
 });
 
-// POST api/order --- this creates a new orderLine triggers when guest clicks add to cart
+// POST api/guest --- this creates a new orderLine triggers when guest clicks add to cart
 router.post('/', async function (req, res, next) {
   try {
      /// similar here we are finding the order
     let order = await findOrder(req.body.orderId);                           //
     if (!order) {                                                   /// if they don't have an order then we are creating one
-      order = await Order.create({ orderId: order.id });              /// we are finding the order 
+      order = await Order.create();      
     }
-    // Calculates subTotal for an item given its quantity           
-    const product_value = await findProduct(req.body.productId);    ///here we are using the helperfunction findProduct to get access to the productId
-    const subTotal = Number(product_value.price) * Number(req.body.quantity); /// then we are calculating the subtotal by multiplying the price x quatity and parsing these as numbers
-    // Finds specific OrderLine and updates quantity/subTotal, if it doesn't exist, it creates one
+              
+    const product_value = await findProduct(req.body.productId);    
+    const subTotal = Number(product_value.price) * Number(req.body.quantity); 
     let orderLine = await findOneOrderLine(order.id, req.body.productId);   
     if (!orderLine) {                                   ///then we are finding the particular oderline and if there is not an orderline we are creating one 
       orderLine = await OrderLine.create({              
@@ -106,7 +102,8 @@ router.post('/', async function (req, res, next) {
         subTotal: subTotal + Number(orderLine.subTotal),
       });
     }
-    res.send(await findOneOrderLine(order.id, req.body.productId));  ///if it 
+    const newItem = await findOneOrderLine(order.id, req.body.productId)
+    res.send(newItem);  ///if it 
   } catch (error) {
     next(error);
   }
@@ -141,6 +138,18 @@ router.delete('/', async function (req, res, next) {
     const orderLine = await findOneOrderLine(order.id, req.body.productId); ///finding the one orderline associated with that orderId and productId 
     await orderLine.destroy();                                              ///and destroying it
     res.send(orderLine);  ///returning the orderline that we destroyed, this is important bc we need to update it in our store and tell it which orderline to destroy
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT api/order/confirm --- this updates order status to 'completed'
+router.put('/confirm', async function (req, res, next) {
+  try {
+    const order = await findOrder(req.body.orderId);
+    const orderLines = await findOrderLines(order.id);
+    const total = orderLines.reduce((price, item) => price + item.subTotal, 0);
+    res.send(await order.update({ status: 'completed', total: total }));
   } catch (error) {
     next(error);
   }

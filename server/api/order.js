@@ -153,7 +153,9 @@ router.put('/confirm', async function (req, res, next) {
   try {
     const user = await User.findByToken(req.headers.authorization);
     const order = await findOrder(user.id);
-    res.send(await order.update({ status: 'completed' }));
+    const orderLines = await findOrderLines(order.id);
+    const total = orderLines.reduce((price, item) => price + item.subTotal, 0);
+    res.send(await order.update({ status: 'completed', total: total }));
   } catch (error) {
     next(error);
   }

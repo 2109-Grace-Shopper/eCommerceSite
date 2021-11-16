@@ -16,10 +16,10 @@ class CartItem extends React.Component {
     this.removeHandler = this.removeHandler.bind(this);
   }
 
-  handleSubmit(id, event) {
+  handleSubmit(orderId, productId, event) {
     event.preventDefault();
-    console.log('we updated!', this.state.quantity);
-    this.props.updateItem(id, this.state.quantity);
+    let guestOrderId = window.localStorage.orderId
+    this.props.updateItem(Number(guestOrderId), productId, this.state.quantity);
   }
 
   qtyChangeHandler(event) {
@@ -28,8 +28,9 @@ class CartItem extends React.Component {
     });
   }
 
-  removeHandler(productId) {
-    this.props.removeItem(productId);
+  removeHandler(orderId, productId) {
+    let guestOrderId = window.localStorage.orderId
+    this.props.removeItem(Number(guestOrderId), productId);
   }
 
   render() {
@@ -76,9 +77,9 @@ class CartItem extends React.Component {
 }
 
 const mapDispatch = (dispatch) => ({
-  removeItem: (productId) => dispatch(removeItem(productId)),
-  updateItem: (productId, quantity) =>
-    dispatch(updateItem(productId, quantity)),
+  removeItem: (orderId, productId) => dispatch(removeItem(orderId, productId)),
+  updateItem: (orderId, productId, quantity) =>
+    dispatch(updateItem(orderId, productId, quantity)),
 });
 
 export default connect(null, mapDispatch)(CartItem);

@@ -12,7 +12,13 @@ class Cart extends React.Component {
   }
 
   componentDidMount() { //when it loads this happens
-    this.props.fetchItems();
+    let guestOrderId = "";
+    if(!window.localStorage.orderId){
+      guestOrderId = 0 
+    } else {
+      guestOrderId = window.localStorage.orderId
+    }
+    this.props.fetchItems(Number(guestOrderId));
   }
 
   getCartCount(cartItems) {
@@ -97,7 +103,7 @@ const mapState = (state) => {
 };                               //this refers to the state in the order reducer
                                   //renaming order to items
 const mapDispatch = (dispatch) => ({
-  fetchItems: () => dispatch(fetchItems()), //ties to our thunk in order.js
+  fetchItems: (orderId) => dispatch(fetchItems(orderId)), //ties to our thunk in order.js
 });
 
 export default connect(mapState, mapDispatch)(Cart);

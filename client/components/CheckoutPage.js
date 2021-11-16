@@ -13,7 +13,8 @@ class CheckoutPage extends React.Component {
   }
 
   handleSubmit(){
-    this.props.clearItems()
+    let guestOrderId = window.localStorage.orderId;
+    this.props.clearItems(Number(guestOrderId))
   }
 
   render(){
@@ -41,11 +42,11 @@ class CheckoutPage extends React.Component {
           </div>
       </Box>
     );
-  };
+  }
 }
 
 const mapDispatch = (dispatch) => ({
-  clearItems: () => dispatch(clearItems())
+  clearItems: (orderId) => dispatch(clearItems(orderId))
 });
 
 export default connect(null, mapDispatch)(CheckoutPage);
