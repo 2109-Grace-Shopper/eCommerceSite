@@ -147,3 +147,14 @@ router.delete('/', async function (req, res, next) {
     next(error);
   }
 });
+
+// PUT api/order/confirm --- this updates order status to 'completed'
+router.put('/confirm', async function (req, res, next) {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    const order = await findOrder(user.id);
+    res.send(await order.update({ status: 'completed' }));
+  } catch (error) {
+    next(error);
+  }
+});
