@@ -103,7 +103,7 @@ class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
-    products: state.products,
+    products: state.products
   };
 };
 
