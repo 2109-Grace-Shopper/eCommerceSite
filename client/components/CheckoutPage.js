@@ -5,6 +5,7 @@ import AddressForm from "./AddressForm";
 import { clearItems } from '../store/order';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PaymentForm from './PaymentForm'
 
 class CheckoutPage extends React.Component {
   constructor(){
@@ -27,6 +28,10 @@ class CheckoutPage extends React.Component {
           <div className="checkout_page">
               <h1>Shipping Address</h1>
               <AddressForm/>
+              <br/>
+              <h1>Payment Information</h1>
+              <PaymentForm/>
+              <br/>
               <Link to="/confirm">
                 <Button
                     variant="contained"
@@ -34,6 +39,7 @@ class CheckoutPage extends React.Component {
                     endIcon={<ArrowRightAltIcon />}
                     size="large"
                     onClick={this.handleSubmit}
+                    style={{float: 'right'}}
                     >
                     Confirm Order
                 </Button>

@@ -1,38 +1,32 @@
 import React from 'react';
-import { Grid, TextField } from '@mui/material';
+import { Grid, TextField, Button, Select, MenuItem} from '@mui/material';
 
 const PaymentForm = ()=> {
   return (
-    <div className="wrapper">
-        <div className="card">  
-            <h2 className="visa">VISA</h2>
-            <h3 className="num">n° 4539  7111  0342  0778</h3>
-
-            <h4>name</h4><br/><h4>Foulen</h4>
-            <h4>EXP</h4><br/><h4>10/21</h4>
-            <h4>CVC</h4><br/><h4>014</h4>
-        </div>
-        <div className="main">
-            <div className="content">
-                <h1>Payment Details</h1>
-                <form> 
-                    <label>Name</label>
-                    <input id="name" type="name" value="Foulen"/>
-                    
-                    <label>Card Number</label>
-                    <input type="text" value="4539 7111 0342 0778"/>
-                    
-                    <label>Expiration Date</label>
-                    <input type="month" value="2021-10"/>
-                    <input type="user" value="014"/>
-                </form>
-                <div className="payment">
-                    <h4>Payment Amount :<div className ="amount"> 50$</div></h4> 
-                    <button>Pay</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <form noValidate autoComplete="off" className="shipping_form">
+      <Grid container spacing={2} >
+        <Grid item xs={12} sm={6}>
+          <TextField label="Name on Card" variant="outlined" fullWidth />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Select label="Type" variant="outlined" fullWidth>
+            <MenuItem value={'Visa'}>Visa</MenuItem>
+            <MenuItem value={'MasterCard'}>MasterCard</MenuItem>
+            <MenuItem value={'Discover'}>Discover</MenuItem>
+          </Select>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField label="Credit Card No." variant="outlined" fullWidth />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField label="CVC" variant="outlined" fullWidth />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField label="Expiration Date" type="date" variant="outlined" fullWidth/>
+        </Grid>
+        <Button variant="contained" style={{margin: 'auto', marginTop: '10px'}}>Save</Button>
+      </Grid>
+    </form>
   );
 };
 
