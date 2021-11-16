@@ -39,7 +39,7 @@ class AllProducts extends React.Component {
 
   handleSubmit(product) {
     // Will have to change this later after adding cart functionality
-    this.props.addItem(product.id, 1);
+    this.props.addItem(product.id, 1); ///adding the item to the cart
     console.log(`${product.name} (cost ${product.price}g) added to cart`);
   }
 
@@ -110,7 +110,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    addItem: (productId, quantity) => dispatch(addItem(productId, quantity)),
+    addItem: (productId, quantity) => dispatch(addItem(productId, quantity)), ///adding the item to the cart
   };
 };
 

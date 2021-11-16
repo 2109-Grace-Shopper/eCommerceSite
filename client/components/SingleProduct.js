@@ -87,7 +87,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => ({
   fetchProduct: (productId) => dispatch(fetchProduct(productId)),
-  addItem: (productId, quantity) => dispatch(addItem(productId, quantity)),
+  addItem: (productId, quantity) => dispatch(addItem(productId, quantity)), //added the logic here of when you add to cart
 });
 
 export default connect(mapState, mapDispatch)(SingleProduct);
