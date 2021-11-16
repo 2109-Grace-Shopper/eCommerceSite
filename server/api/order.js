@@ -40,6 +40,7 @@ async function findOneOrderLine(orderId, productId) {
         orderId,
         productId,
       },
+      include: Product,
     });
     return product;
   } catch (error) {
@@ -98,6 +99,7 @@ router.post('/', async function (req, res, next) {
         quantity: req.body.quantity,
         subTotal: subTotal //added subTotal
       });
+      res.send(await findOneOrderLine(order.id, req.body.productId));
     } else {
       res.send(
         await orderLine.update({
@@ -106,7 +108,6 @@ router.post('/', async function (req, res, next) {
         })
       );
     }
-    res.send(orderLine);
   } catch (error) {
     next(error);
   }

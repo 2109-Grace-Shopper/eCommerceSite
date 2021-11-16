@@ -10,18 +10,12 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
  class Cart extends React.Component {
     constructor() {
       super();
-      this.state = {
-        items: []
-      }
       this.getCartCount = this.getCartCount.bind(this)
       this.getCartTotal = this.getCartTotal.bind(this)
     }
   
-    async componentDidMount() {
-      await this.props.fetchItems();
-      this.setState({
-        items: this.props.items
-      })
+    componentDidMount() {
+      this.props.fetchItems();
     }
 
     getCartCount(cartItems){
@@ -34,7 +28,7 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
     };
   
     render() {
-      const cartItems = this.state.items;
+      const cartItems = this.props.items;
       console.log(cartItems)
       
       return (
@@ -69,7 +63,7 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
               </div>
               {cartItems.map((item) => (
                 <CartItem
-                  key={item.productId}
+                  key={item.product.id}
                   item={item}
                 />
               ))}
@@ -83,7 +77,7 @@ import {fetchItems, updateItem, removeItem} from '../store/order'
                 <p>{this.getCartCount(cartItems)} items</p>
               </div>
               {cartItems.map((item) => (
-                <div id="cart_subtotal">
+                <div id="cart_subtotal" key={item.product.id}>
                   <p>{item.product.name}</p>
                   <p>{item.subTotal}g</p>
                 </div>

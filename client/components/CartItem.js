@@ -30,7 +30,6 @@ class CartItem extends React.Component{
 
   removeHandler(productId) {
     this.props.removeItem(productId)
-    window.location.reload()
   }
 
   render(){
