@@ -11,7 +11,7 @@ class Cart extends React.Component {
     this.getCartTotal = this.getCartTotal.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { //when it loads this happens
     this.props.fetchItems();
   }
 
@@ -28,7 +28,7 @@ class Cart extends React.Component {
 
   render() {
     const cartItems = this.props.items;
-    console.log(cartItems);
+    console.log(cartItems);    ///cart items comes from the backend
 
     return (
       <>
@@ -59,9 +59,9 @@ class Cart extends React.Component {
                   <div>
                     <h3>Delete</h3>
                   </div>
-                </div>
+                </div> 
                 {cartItems.map((item) => (
-                  <CartItem key={item.product.id} item={item} />
+                  <CartItem key={item.product.id} item={item} /> //attributes of the item available at this.props.item
                 ))}
               </div>
             )}
@@ -95,11 +95,11 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  return { items: state.order };
-};
-
+  return { items: state.order }; //items is available in the component as this.props.items
+};                               //this refers to the state in the order reducer
+                                  //renaming order to items
 const mapDispatch = (dispatch) => ({
-  fetchItems: () => dispatch(fetchItems()),
+  fetchItems: () => dispatch(fetchItems()), //ties to our thunk in order.js
 });
 
 export default connect(mapState, mapDispatch)(Cart);

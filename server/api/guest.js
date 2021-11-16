@@ -1,19 +1,20 @@
 const router = require('express').Router();
 const {
-  models: { User, Product, Order, OrderLine },
+  models: { Product, Order, OrderLine },
 } = require('../db');
 module.exports = router;
 
 // HELPER FUNCTIONS:
-// findOrder -- finds a user's active order
-async function findOrder(userId) {
+// findOrder -- finds an active order
+async function findOrder(orderId) {
   try {
     const order = await Order.findOne({ /// find the one specific order that is in the cart and going to return it
       where: {
-        userId,
+        id: orderId,  
         status: 'in cart', ///here we have an ENUM that has in cart, pending or completed
       },
     });
+    console.log(order)
     return order;
   } catch (error) {
     console.log(error);
@@ -62,14 +63,14 @@ async function findProduct(productId) {       /// we are finding the product bas
 }
 
 // ROUTES
-// GET api/order --- this gets all the items in the order
+// GET api/guest --- this gets all the items in the order
 router.get('/', async function (req, res, next) {       /// Getting the order and getting all the products in that order
   try {
-    // Finds user's order, if it doesn't exist, it creates one
-    const user = await User.findByToken(req.headers.authorization);  //find the user findbytoken
-    let order = await findOrder(user.id); /// find the specific order using the helper function we defined above
+    
+    let order = await findOrder(req.body.orderId); /// find the specific order using the helper function we defined above
+    console.log(order)
     if (!order) {                         ///we say that if they don't have an active order  
-      order = await Order.create({ userId: user.id }); ///then we will create an order for them, and by default the status goes to 'in cart'
+      order = await Order.create({ orderId: order.id }); ///then we will create an order for them, and by default the status goes to 'in cart'
     }
     // Finds items in specific order and returns them
     const products = await findOrderLines(order.id);  /// then we find all the products within the order
@@ -143,17 +144,6 @@ router.delete('/', async function (req, res, next) {
     const orderLine = await findOneOrderLine(order.id, req.body.productId); ///finding the one orderline associated with that orderId and productId 
     await orderLine.destroy();                                              ///and destroying it
     res.send(orderLine);  ///returning the orderline that we destroyed, this is important bc we need to update it in our store and tell it which orderline to destroy
-  } catch (error) {
-    next(error);
-  }
-});
-
-// PUT api/order/confirm --- this updates order status to 'completed'
-router.put('/confirm', async function (req, res, next) {
-  try {
-    const user = await User.findByToken(req.headers.authorization);
-    const order = await findOrder(user.id);
-    res.send(await order.update({ status: 'completed' }));
   } catch (error) {
     next(error);
   }
