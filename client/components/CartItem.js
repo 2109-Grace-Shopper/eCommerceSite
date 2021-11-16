@@ -43,7 +43,7 @@ class CartItem extends React.Component {
         <Link to={`/products/${item.productId}`} className="cartItem__name">
           <p>{item.product.name}</p>
         </Link>
-        <p className="cartitem__price">{item.product.price}g</p>
+        <p className="cartitem__price"><img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />{item.product.price}g</p>
         <form
           className="cartItem__select"
           onSubmit={(event) => this.handleSubmit(item.productId, event)}

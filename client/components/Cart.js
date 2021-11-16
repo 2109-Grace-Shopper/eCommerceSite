@@ -73,7 +73,7 @@ class Cart extends React.Component {
               {cartItems.map((item) => (
                 <div id="cart_subtotal" key={item.product.id}>
                   <p>{item.product.name}</p>
-                  <p>{item.subTotal}g</p>
+                  <p><img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />{item.subTotal}g</p>
                 </div>
               ))}
               <div id="cart_total">
