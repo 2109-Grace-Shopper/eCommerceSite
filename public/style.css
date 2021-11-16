@@ -185,14 +185,13 @@ input:focus {
 }
 
 /* Profile page */
-.MuiBox-root-1 {
-  padding-left: 350px;
-  padding-right: 350px;
+.profile_box{
+  padding: 2% 10%;
   text-align: center;
   align-content: center;
   border: 60px;
-  margin: 120px;
-  color: white;
+  margin: 5% 20%;
+  background-color: #e4fbff;
 }
 .profileimage {
   align-items: center;
@@ -410,4 +409,8 @@ input:focus {
 .shiping_box{
   padding: 3%;
   margin: auto;
+}
+
+.css-mhc70k-MuiGrid-root>.MuiGrid-item{
+  padding-left: 0;
 }
