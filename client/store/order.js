@@ -12,6 +12,7 @@ const SET_ITEMS = 'SET_ITEMS';
 const ADD_ITEM = 'ADD_ITEM';
 const UPDATE_ITEM = 'UPDATE_ITEM';
 const REMOVE_ITEM = 'REMOVE_ITEM';
+const CLEAR_ITEMS = 'CLEAR_ITEMS';
 
 // ACTION CREATORS:
 const _setItems = (items) => {
@@ -39,6 +40,12 @@ const _removeItem = (item) => {
   return {
     type: REMOVE_ITEM,
     item,
+  };
+};
+
+const _clearItems = () => {
+  return {
+    type: CLEAR_ITEMS,
   };
 };
 
@@ -102,6 +109,17 @@ export const removeItem = (productId) => {
   };
 };
 
+export const clearItems = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put('/api/order/confirm', header);
+      dispatch(_clearItems());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 // REDUCER
 export default function orderReducer(state = [], action) {
   switch (action.type) {
@@ -124,6 +142,8 @@ export default function orderReducer(state = [], action) {
       );
     case REMOVE_ITEM:
       return state.filter((item) => item.productId !== action.item.productId);
+    case CLEAR_ITEMS:
+      return [];
     default:
       return state;
   }
