@@ -28,8 +28,6 @@ class Cart extends React.Component {
 
   render() {
     const cartItems = this.props.items;
-    console.log(cartItems);    ///cart items comes from the backend
-
     return (
       <>
         <div className="cartscreen">
