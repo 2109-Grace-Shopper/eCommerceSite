@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleUser } from '../store';
-import { Grid, Paper, Avatar, Button } from '@material-ui/core';
+import { Paper, Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { Label } from '@material-ui/icons';
 import { logout } from '../store';
 
 export class ProfilePage extends React.Component {
@@ -33,7 +32,7 @@ export class ProfilePage extends React.Component {
           <Button>
             <h4 className={'profilebuttonlabel'}>My Cart</h4>
           </Button>
-          <Button onClick={this.props.handleClick}>
+          <Button onClick={this.props.handleLogout}>
             <h4 className={'profilebuttonlabel'}>Log Out</h4>
           </Button>
         </Paper>
@@ -42,19 +41,19 @@ export class ProfilePage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapState = (state) => {
   return {
-    loggedInUser: state.auth, //we used this to get the profile information without having to use user/id
-    //leveraged the auth which uses findByToken to get the profile data
+    loggedInUser: state.auth
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick() {
+    handleLogout() {
       dispatch(logout());
+      window.location.reload()
     },
   };
 };
 
-export const Profile = connect(mapStateToProps, mapDispatch)(ProfilePage);
+export const Profile = connect(mapState, mapDispatch)(ProfilePage);

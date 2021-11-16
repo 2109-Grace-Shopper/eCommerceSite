@@ -112,7 +112,7 @@ export const removeItem = (productId) => {
 export const clearItems = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/order/confirm', header);
+      const { data } = await axios.put('/api/order/confirm', {}, header);
       dispatch(_clearItems());
     } catch (error) {
       console.log(error);

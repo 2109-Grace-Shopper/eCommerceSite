@@ -2,14 +2,18 @@ import { Box, Button, Typography, FormControl } from '@mui/material';
 import React from 'react';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import AddressForm from "./AddressForm";
+import { clearItems } from '../store/order';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class CheckoutPage extends React.Component {
   constructor(){
     super();
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit(){
-    
+    this.props.clearItems()
   }
 
   render(){
@@ -23,20 +27,25 @@ class CheckoutPage extends React.Component {
           <div className="checkout_page">
               <h1>Shipping Address</h1>
               <AddressForm/>
-              <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  endIcon={<ArrowRightAltIcon />}
-                  size="large"
-                  onClick={()=>this.handleSubmit}
-                  >
-                  Confirm Order
-              </Button>
+              <Link to="/confirm">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    endIcon={<ArrowRightAltIcon />}
+                    size="large"
+                    onClick={this.handleSubmit}
+                    >
+                    Confirm Order
+                </Button>
+              </Link>
           </div>
       </Box>
     );
   };
 }
 
-export default CheckoutPage;
+const mapDispatch = (dispatch) => ({
+  clearItems: () => dispatch(clearItems())
+});
+
+export default connect(null, mapDispatch)(CheckoutPage);
