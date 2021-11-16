@@ -63,7 +63,7 @@ async function findProduct(productId) {       /// we are finding the product bas
 }
 
 // ROUTES
-// GET api/guest --- this gets all the items in the order
+// GET api/guest --- this gets all the items in the order, triggers when guest clicks cart icon
 router.get('/', async function (req, res, next) {       /// Getting the order and getting all the products in that order
   try {
     
@@ -80,14 +80,13 @@ router.get('/', async function (req, res, next) {       /// Getting the order an
   }
 });
 
-// POST api/order --- this creates a new orderLine
+// POST api/order --- this creates a new orderLine triggers when guest clicks add to cart
 router.post('/', async function (req, res, next) {
   try {
-    // Finds user's order, if it doesn't exist, it creates one
-    const user = await User.findByToken(req.headers.authorization);   /// similar here we are finding the user
-    let order = await findOrder(user.id);                           /// we are finding the order
+     /// similar here we are finding the order
+    let order = await findOrder(req.body.orderId);                           //
     if (!order) {                                                   /// if they don't have an order then we are creating one
-      order = await Order.create({ userId: user.id });              /// we are finding the order 
+      order = await Order.create({ orderId: order.id });              /// we are finding the order 
     }
     // Calculates subTotal for an item given its quantity           
     const product_value = await findProduct(req.body.productId);    ///here we are using the helperfunction findProduct to get access to the productId
@@ -116,9 +115,8 @@ router.post('/', async function (req, res, next) {
 // PUT api/order --- this updates an orderLine
 router.put('/', async function (req, res, next) {
   try {
-    // Finds user's order
-    const user = await User.findByToken(req.headers.authorization);  ///finding the user and the order
-    const order = await findOrder(user.id);
+     ///finding the order
+    const order = await findOrder(req.body.orderId);
     // Calculates subTotal for an item given its quantity
     const product_value = await findProduct(req.body.productId);
     const subTotal = Number(product_value.price) * Number(req.body.quantity);
@@ -138,9 +136,8 @@ router.put('/', async function (req, res, next) {
 // DELETE api/order --- this deletes an orderLine
 router.delete('/', async function (req, res, next) {
   try {
-    // Finds specific orderLine in user's order and deletes it
-    const user = await User.findByToken(req.headers.authorization);
-    const order = await findOrder(user.id);
+    // Finds specific orderLine in guest order and deletes it
+    const order = await findOrder(req.body.orderId);
     const orderLine = await findOneOrderLine(order.id, req.body.productId); ///finding the one orderline associated with that orderId and productId 
     await orderLine.destroy();                                              ///and destroying it
     res.send(orderLine);  ///returning the orderline that we destroyed, this is important bc we need to update it in our store and tell it which orderline to destroy
