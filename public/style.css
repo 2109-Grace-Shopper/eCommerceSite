@@ -414,3 +414,30 @@ input:focus {
 .css-mhc70k-MuiGrid-root>.MuiGrid-item{
   padding-left: 0;
 }
+
+/* order history */
+
+#history{
+  
+}
+.order_history{
+  display: grid;
+  grid-template-columns: 1fr 8fr 3fr;
+  align-items: start;
+  text-align: left;
+}
+
+.order_number{
+  text-align: left;
+}
+
+.order_total{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 1em;
+  text-align: right;
+}
+
+#history_img{
+  margin: auto;
+}
+
