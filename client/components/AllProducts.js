@@ -49,7 +49,6 @@ class AllProducts extends React.Component {
 
   render() {
     const products = this.filterProducts();
-    // const userId = this.props.user.id; 
     return (
       <div>
         <div className="filter">
@@ -104,7 +103,6 @@ class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
-    user: state.user,
     products: state.products
   };
 };
