@@ -190,7 +190,7 @@ input:focus {
   text-align: center;
   align-content: center;
   border: 60px;
-  margin: 5% 20%;
+  margin: 5% 10%;
   background-color: #e4fbff;
 }
 .profileimage {
@@ -206,6 +206,16 @@ input:focus {
   color: #2840c7;
   padding: 2px;
   margin: 2px;
+}
+
+.profile_info{
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr 1fr 1fr;
+  align-items: center;
+}
+
+.profile_info h4{
+  font-size: 0.875rem;
 }
 
 /* confirmation page */
@@ -417,14 +427,12 @@ input:focus {
 
 /* order history */
 
-#history{
-  
-}
 .order_history{
   display: grid;
   grid-template-columns: 1fr 8fr 3fr;
   align-items: start;
   text-align: left;
+  margin: -7px auto;
 }
 
 .order_number{

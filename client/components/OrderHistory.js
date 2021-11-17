@@ -24,7 +24,7 @@ class OrderHistory extends React.Component {
             {orders.map((singleOrder) => (
                 <div>
                     <br/>
-                    <h2 className="order_number">Order Number: xxxxxxxxxx</h2>
+                    <h3 className="order_number">Order Number: xxxxxxxxxx</h3>
                     {singleOrder.map((item => (
                         <div key={item.product.id}>
                         <div className="order_history">
