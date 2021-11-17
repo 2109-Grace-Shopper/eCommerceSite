@@ -27,24 +27,24 @@ export class ProfilePage extends React.Component {
           </h3>
           <h3>Email: {this.props.user.email}</h3>
           <div>
-            <div>
+            <div className="profile_info">
               <Link to='/profile/edit'>
-                <h4 className='profilebuttonlabel'>Edit Profile</h4>
+                <h4 className='profilebuttonlabel'>EDIT PROFILE</h4>
               </Link>
               <Link to='/profile/address'>
-                <h4 className='profilebuttonlabel'>Shipping Address</h4>
+                <h4 className='profilebuttonlabel'>SHIPPING ADDRESS</h4>
               </Link>
               <Link to='/profile/payment'>
-                <h4 className='profilebuttonlabel'>Payment Method</h4>
+                <h4 className='profilebuttonlabel'>PAYMENT METHOD</h4>
               </Link>
               <Link to='/profile/history'>
-                <h4 className='profilebuttonlabel'>Previous Purchases</h4>
+                <h4 className='profilebuttonlabel'>ORDER HISTORY</h4>
               </Link>
               <Link to='/cart'>
-                <h4 className='profilebuttonlabel'>My Cart</h4>
+                <h4 className='profilebuttonlabel'>MY CART</h4>
               </Link>
               <Button onClick={this.props.handleLogout}>
-                <h4 className='profilebuttonlabel'>Log Out</h4>
+                <h4 className='profilebuttonlabel'>LOG OUT</h4>
               </Button>
             </div>
             <hr/>
