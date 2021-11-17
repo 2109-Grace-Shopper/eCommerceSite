@@ -7,8 +7,6 @@ const header = {
   },
 };
 
-//const guestOrder = window.localStorage.getItem("orderId")
-
 // ACTION TYPES:
 const SET_ITEMS = 'SET_ITEMS';
 const ADD_ITEM = 'ADD_ITEM';
