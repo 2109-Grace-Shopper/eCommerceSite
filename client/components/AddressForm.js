@@ -6,10 +6,10 @@ const AddressForm = ()=> {
     <form noValidate autoComplete="off" className="shipping_form">
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <TextField label="First Name" variant="outlined" fullWidth />
+          <TextField label="Name" variant="outlined" fullWidth />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField label="Last Name" variant="outlined" fullWidth />
+          <TextField label="Email" variant="outlined" fullWidth />
         </Grid>
         <Grid item xs={12}>
           <TextField label="Address line 1" variant="outlined" fullWidth />

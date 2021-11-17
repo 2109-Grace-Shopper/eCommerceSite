@@ -3,20 +3,7 @@ const {
   models: { User },
 } = require('../db');
 module.exports = router;
-
-const isAdminCheck = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    const user = await User.findByToken(token);
-    if (user.isAdmin) {
-      next();
-    } else {
-      throw new Error("Get out of here, Morris! You're not allowed!");
-    }
-  } catch (error) {
-    next(error);
-  }
-};
+const {isAdminCheck} = require('./isAdmin')
 
 //GET all users
 //api/users

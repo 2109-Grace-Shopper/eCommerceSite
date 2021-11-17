@@ -49,6 +49,18 @@ body {
     margin: 5px;
     padding: 2px 5px;
   }
+
+  .MuiGrid-root h1 p{
+    font-size: smaller;
+  }
+
+  .MuiGrid-root img{
+    size: 50%;
+  }
+
+  .MuiGrid-root{
+    flex-wrap: wrap;
+  }
 }
 
 

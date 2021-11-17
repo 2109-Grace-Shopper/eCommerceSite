@@ -32,7 +32,13 @@ class SingleProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addItem(this.props.match.params.productId, this.state.qty);
+    let guestOrderId = "";
+    if(!window.localStorage.orderId){
+      guestOrderId = 0 
+    } else {
+      guestOrderId = window.localStorage.orderId
+    }
+    this.props.addItem(Number(guestOrderId), this.props.match.params.productId, this.state.qty);
   }
 
   render() {
@@ -87,7 +93,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => ({
   fetchProduct: (productId) => dispatch(fetchProduct(productId)),
-  addItem: (productId, quantity) => dispatch(addItem(productId, quantity)), //added the logic here of when you add to cart
+  addItem: (orderId, productId, quantity) => dispatch(addItem(orderId, productId, quantity)), //added the logic here of when you add to cart
 });
 
 export default connect(mapState, mapDispatch)(SingleProduct);
