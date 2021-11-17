@@ -1,85 +1,62 @@
-## About Pierre's General Store
-To start:
-- npm install
-- npm run seed
-- npm run start:dev
-- open: localhost8080
+# Welcome To Pierre's General Store
+Stardew Valley’s beloved Shop Owner has expanded to the web. 
+We’ve created a fullstack e-commerce application.
+See the store for yourself at [Pierre’s General Store](https://pierresgeneralstore.herokuapp.com/)
 
-# FS-App-Template
-
-## Setup
-
-To use this as boilerplate, you'll need to take the following steps:
-
-* Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
-
-* Now you will have to add the fs-app-template as a remote and merge it into your own repository.
-
+## Setup:
 ```
-git remote add boilermaker git@github.com:FullstackAcademy/fs-app-template.git
-git fetch boilermaker
-git merge boilermaker/main
-git branch -m master main
+git clone git@github.com:2109-Grace-Shopper/eCommerceSite.git
+npm install
+createdb pierres
+npm run seed
+npm run start:dev
 ```
 
-## Customize
-
-Now that you've got the code, follow these steps to get acclimated:
-
-* Update project name and description in `package.json`
-* `npm install`
-* Create two postgres databases (`MY_APP_NAME` should match the `name`
-  parameter in `package.json`):
-* These commands will create both your **development** and **test** databases
-
-```
-createdb <YOUR APP NAME HERE FROM package.json>
-createdb <YOUR APP NAME HERE FROM package.json>-test
-```
-
-* By default, running `npm test` will use your test database, while
-  regular development uses development database
-
-## Start
-
-Sync and seed your database by running `npm run seed`. Running `npm run start:dev` will make great things happen!
-
-- start:dev will both start your server and build your client side files using webpack
-- start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
-- start:dev:seed will start your server and also seed your database (this is useful when you are making schema changes and you don't want to run your seed script separately)
+## Tech Stack:
+ 
+### React: JS library for building user interfaces based on UI components. 
+ 
+### Redux: JS library for managing and centralizing application state.
+ 
+### Material-UI: Allowed us to import and use different components to create a user interface in our React applications.
+ 
+### Node.js: Open source server environment.
+ 
+### Express: Back end web application framework for Node.js.
+ 
+### PostgreSQL: Relational database management system.
+ 
+### Heroku: Used to deploy, manage, and scale.
 
 
-### Heroku
+## Screenshots:
+Home:
+![](public/home_page.png)
 
-1.  Set up the [Heroku command line tools][heroku-cli]
-2.  `heroku login`
-3.  Add a git remote for heroku:
+All Products:
+![](public/all_products.png)
 
-[heroku-cli]: https://devcenter.heroku.com/articles/heroku-cli
+Checkout:
+![](public/shopping_cart.png)
 
-* **If you are creating a new app...**
+User:
+![](public/user_profile.png)
 
-  1.  `heroku create` or `heroku create your-app-name` if you have a
-      name in mind.
-  2.  `heroku config:set JWT=<your secret here!>` to set a secret for JWT signing
+## Team:
 
-Database Setup
+### Anshu Patel:
+[Github](https://github.com/Litwix)
+[LinkedIn](https://www.linkedin.com/in/anshupatel314/)
 
-  3.  `heroku addons:create heroku-postgresql:hobby-dev` to add
-      ("provision") a postgres database to your heroku dyno (This creates your production database)
+### Claudia Flores:
+[Github](https://github.com/cflores-1)
+[LinkedIn](https://www.linkedin.com/in/claudia-f-261691117/)
+ 
+### Emily Roble:
+[Github](https://github.com/Evroble)
+[LinkedIn](https://www.linkedin.com/in/emily-roble-5a4b5713b/)
+ 
+### Zoe Zhang:
+[Github](https://github.com/YizhuoZhang3)
+[LinkedIn](https://www.linkedin.com/in/zoe-yizhuo-zhang-73152286/)
 
-  4.  `heroku config:set SEED=true` to get heroku to sync and seed your database
-
-  5.   note everytime your app restarts, the database tables will be dropped and re-created. To avoid this you can `config:unset SEED`
-
-
-* **If you already have a Heroku app...**
-
-  1.  `heroku git:remote your-app-name` You'll need to be a
-      collaborator on the app.
-
-
-Now, you should be deployed!
-xxx
