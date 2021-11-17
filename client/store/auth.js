@@ -5,11 +5,9 @@ const TOKEN = 'token';
 
 // ACTION TYPES:
 const SET_AUTH = 'SET_AUTH';
-const SIGN_UP = 'SIGN_UP';
 
 // ACTION CREATORS:
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
-const signUp = (signup) => ({ type: SIGN_UP, signup });
 
 // THUNKS:
 export const me = () => async (dispatch) => {
@@ -24,23 +22,13 @@ export const me = () => async (dispatch) => {
   }
 };
 
-export const signup_me = () => async (dispatch) => {
-  const token = window.localStorage.getItem(TOKEN);
-  if (token) {
-    const res = await axios.get('/auth/me', {
-      headers: {
-        authorization: token,
-      },
-    });
-    return dispatch(signUp(res.data));
-  }
-};
-
 export const authenticate = (email, password, method) => async (dispatch) => {
   try {
     const res = await axios.post(`/auth/${method}`, { email, password });
     window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
+    history.push('/profile');
+    window.location.reload();
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
@@ -55,11 +43,9 @@ export const signup =
         email,
         password,
       });
-      window.localStorage.setItem(TOKEN, res.data.token);
-      dispatch(signup_me());
-      history.push('/');
+      history.push('/login');
     } catch (authError) {
-      return dispatch(signUp({ error: authError }));
+      return dispatch(setAuth({ error: authError }));
     }
   };
 
@@ -77,8 +63,6 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth;
-    case SIGN_UP:
-      return action.signup;
     default:
       return state;
   }

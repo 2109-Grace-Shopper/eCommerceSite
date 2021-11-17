@@ -29,15 +29,8 @@ const AuthForm = (props) => {
     margin: '8px 0',
   };
 
-  // Added to redirect to profile page once user logged in
-  const history = useHistory();
-
   const handleSubmitProfile = (evt) => {
-    handleSubmit(evt).then(() => {
-      let path = '/profile';
-      history.push(path);
-      window.location.reload();
-    });
+    handleSubmit(evt);
   };
 
   return (
