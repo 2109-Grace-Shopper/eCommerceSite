@@ -1,12 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Container, Grid, Item } from '@mui/material';
 import Button from '@mui/material/Button';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { Container, Grid, Item } from '@mui/material';
 
-/**
- * COMPONENT
- */
 export const Home = (props) => {
   const { firstName } = props;
 
@@ -44,9 +41,6 @@ export const Home = (props) => {
   );
 };
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     firstName: state.auth.firstName,

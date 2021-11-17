@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { authenticate } from '../store';
 import {
   Grid,
@@ -11,7 +12,6 @@ import {
   Link,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { useHistory } from 'react-router-dom';
 
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
@@ -29,7 +29,7 @@ const AuthForm = (props) => {
     margin: '8px 0',
   };
 
-  //added to redirect to profile page once user logged in
+  // Added to redirect to profile page once user logged in
   const history = useHistory();
 
   const handleSubmitProfile = (evt) => {

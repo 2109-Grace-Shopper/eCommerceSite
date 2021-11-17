@@ -3,21 +3,15 @@ import history from '../history';
 
 const TOKEN = 'token';
 
-/**
- * ACTION TYPES
- */
+// ACTION TYPES:
 const SET_AUTH = 'SET_AUTH';
 const SIGN_UP = 'SIGN_UP';
 
-/**
- * ACTION CREATORS
- */
+// ACTION CREATORS:
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
 const signUp = (signup) => ({ type: SIGN_UP, signup });
-/**
- * THUNK CREATORS
- */
 
+// THUNKS:
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
@@ -63,7 +57,7 @@ export const signup =
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(signup_me());
-      history.push("/")
+      history.push('/');
     } catch (authError) {
       return dispatch(signUp({ error: authError }));
     }
@@ -78,9 +72,7 @@ export const logout = () => {
   };
 };
 
-/**
- * REDUCER
- */
+// REDUCER:
 export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
 import { addItem } from '../store/order';
 import Button from '@mui/material/Button';
@@ -32,19 +31,21 @@ class SingleProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let guestOrderId = "";
-    if(!window.localStorage.orderId){
-      guestOrderId = 0 
+    let guestOrderId = '';
+    if (!window.localStorage.orderId) {
+      guestOrderId = 0;
     } else {
-      guestOrderId = window.localStorage.orderId
+      guestOrderId = window.localStorage.orderId;
     }
-    this.props.addItem(Number(guestOrderId), this.props.match.params.productId, this.state.qty);
+    this.props.addItem(
+      Number(guestOrderId),
+      this.props.match.params.productId,
+      this.state.qty
+    );
   }
 
   render() {
     const product = this.props.product;
-    console.log(this.props, 'this is props');
-    console.log(this.state, 'this is the state');
     return (
       <div className="singleProductDiv">
         <img
@@ -58,14 +59,6 @@ class SingleProduct extends React.Component {
           {product.price}g
         </h2>
         <h2 className="singleProductDesc">{product.description}</h2>
-
-        {/* Insert add to cart button, and increment/decrement buttons here for quantity */}
-        {/* Need to come back and try to get this working with material ui */}
-        {/* <InputLabel id="selectQty">1</InputLabel>
-          <Select labelId="selectQty"
-            id="selectQty"
-            value={this.state.qty}
-            /> */}
         <form className="single_product_form" onSubmit={this.handleSubmit}>
           <label htmlFor="qty">Quantity</label>
           <input
@@ -93,7 +86,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => ({
   fetchProduct: (productId) => dispatch(fetchProduct(productId)),
-  addItem: (orderId, productId, quantity) => dispatch(addItem(orderId, productId, quantity)), //added the logic here of when you add to cart
+  addItem: (orderId, productId, quantity) =>
+    dispatch(addItem(orderId, productId, quantity)),
 });
 
 export default connect(mapState, mapDispatch)(SingleProduct);
