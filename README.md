@@ -1,3 +1,10 @@
+## About Pierre's General Store
+To start:
+- npm install
+- npm run seed
+- npm run start:dev
+- open: localhost8080
+
 # FS-App-Template
 
 ## Setup
