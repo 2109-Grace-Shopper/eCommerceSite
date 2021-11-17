@@ -46,17 +46,21 @@ User:
 
 ### Anshu Patel:
 [Github](https://github.com/Litwix)
+
 [LinkedIn](https://www.linkedin.com/in/anshupatel314/)
 
 ### Claudia Flores:
 [Github](https://github.com/cflores-1)
+
 [LinkedIn](https://www.linkedin.com/in/claudia-f-261691117/)
  
 ### Emily Roble:
 [Github](https://github.com/Evroble)
+
 [LinkedIn](https://www.linkedin.com/in/emily-roble-5a4b5713b/)
  
 ### Zoe Zhang:
 [Github](https://github.com/YizhuoZhang3)
+
 [LinkedIn](https://www.linkedin.com/in/zoe-yizhuo-zhang-73152286/)
 
