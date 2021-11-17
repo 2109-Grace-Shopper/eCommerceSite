@@ -17,7 +17,7 @@ class Navbar extends React.Component {
     return (
       <div className="navbar">
         <h1>Pierre's General Store</h1>
-        <p>(Song: Stardew Valley Overture)</p>
+        //<p>(Song: Stardew Valley Overture)</p>
         {/* <audio className="audio-element">
           <source src="https://vgmsite.com/soundtracks/stardew-valley/jijokidi/01%20-%20Stardew%20Valley%20Overture.mp3" ></source>
         </audio>   */}
