@@ -34,8 +34,7 @@ export const authenticate = (email, password, method) => async (dispatch) => {
   }
 };
 
-export const signup =
-  (firstName, lastName, email, password, method) => async (dispatch) => {
+export const signup = (firstName, lastName, email, password, method) => async (dispatch) => {
     try {
       const res = await axios.post(`/auth/${method}`, {
         firstName,
