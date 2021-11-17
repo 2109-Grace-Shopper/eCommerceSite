@@ -9,14 +9,14 @@ class Navbar extends React.Component {
   componentDidMount() {
     ///used class component to update the badge icon using material UI
     const audio = document.getElementsByClassName('audio-element')[0];
-    // audio.play()
+    audio.play()
     this.props.fetchItems(); 
   } 
   render() {
     return (
       <div className="navbar">
         <h1>Pierre's General Store</h1>
-        <p>(Song: Stardew Valley Overture)</p>
+        {/* <p>(Song: Stardew Valley Overture)</p> */}
         <audio className="audio-element">
           <source src="https://vgmsite.com/soundtracks/stardew-valley/jijokidi/01%20-%20Stardew%20Valley%20Overture.mp3"></source>
         </audio>
