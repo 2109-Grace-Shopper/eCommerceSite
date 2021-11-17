@@ -64,11 +64,13 @@ async function findProduct(productId) {       /// we are finding the product bas
 
 // ROUTES
 // GET api/guest --- this gets all the items in the order, triggers when guest clicks cart icon
-router.get('/', async function (req, res, next) {       /// Getting the order and getting all the products in that order
+router.post('/order', async function (req, res, next) {       /// Getting the order and getting all the products in that order
   try {
     
-    let order = await Order.findByPk(req.body.orderId); /// find the specific order using the helper function we defined above
+    let order = await Order.findByPk(req.body.orderId);
+     /// find the specific order using the helper function we defined above
     // Finds items in specific order and returns them
+    console.log("this is req.body", req.body)
     console.log(order)
     const products = await findOrderLines(order.id);  /// then we find all the products within the order
     res.send(products);                               /// if an order already exists then it will return all the products within that order and send those back

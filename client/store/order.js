@@ -7,7 +7,7 @@ const header = {
   },
 };
 
-const guestOrder = window.localStorage.getItem("orderId")
+//const guestOrder = window.localStorage.getItem("orderId")
 
 // ACTION TYPES:
 const SET_ITEMS = 'SET_ITEMS';
@@ -59,7 +59,7 @@ export const fetchItems = (orderId) => {
       const { data } = await axios.get('/api/order', header); ///here we have the get route for the api order
       dispatch(_setItems(data)); 
     } else{
-      const { data } = await axios.get('/api/guest', {orderId})
+      const { data } = await axios.post('/api/guest/order', {orderId})
       console.log(data)
       dispatch(_setItems(data));
     }
@@ -83,7 +83,7 @@ export const addItem = (orderId, productId, quantity) => {
         dispatch(_addItem(data));
       } else{
         const { data } = await axios.post('/api/guest', {orderId, productId, quantity})
-        if(guestOrder !== data.orderId){
+        if(window.localStorage.orderId !== data.orderId){
           window.localStorage.setItem("orderId", data.orderId)
         }
         console.log("this is hitting guest")

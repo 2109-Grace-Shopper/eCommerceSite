@@ -12,12 +12,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() { //when it loads this happens
-    let guestOrderId = "";
-    if(!window.localStorage.orderId){
-      guestOrderId = 0 
-    } else {
-      guestOrderId = window.localStorage.orderId
-    }
+    let guestOrderId = window.localStorage.orderId
     this.props.fetchItems(Number(guestOrderId));
   }
 

@@ -10,7 +10,7 @@ class Navbar extends React.Component {
     const audio = document.getElementsByClassName('audio-element')[0]
     // audio.play()
     let guestOrderId = window.localStorage.orderId
-    this.props.fetchItems(guestOrderId); ///when it fetches the items, it updates the order state on (line 50) 
+    this.props.fetchItems(Number(guestOrderId)); ///when it fetches the items, it updates the order state on (line 50) 
   }                         ///then we can get the length of the order to update how many unique items are in the cart (line 37)
                         ///bc of this as soon as a user logs in they have a cart
   render() {

@@ -16,7 +16,7 @@ class CartItem extends React.Component {
     this.removeHandler = this.removeHandler.bind(this);
   }
 
-  handleSubmit(orderId, productId, event) {
+  handleSubmit(productId, event) {
     event.preventDefault();
     let guestOrderId = window.localStorage.orderId
     this.props.updateItem(Number(guestOrderId), productId, this.state.quantity);
@@ -28,7 +28,7 @@ class CartItem extends React.Component {
     });
   }
 
-  removeHandler(orderId, productId) {
+  removeHandler(productId) {
     let guestOrderId = window.localStorage.orderId
     this.props.removeItem(Number(guestOrderId), productId);
   }
