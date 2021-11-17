@@ -26,7 +26,7 @@ npm run start:dev
  
 #### PostgreSQL: Relational database management system.
  
-#### Heroku: Used to deploy, manage, and scale.
+#### Heroku: Used to deploy, manage, and scale. 
 
 
 ## Screenshots:
@@ -42,7 +42,7 @@ Checkout:
 User:
 ![](public/user_profile.png)
 
-## Team:
+## Team: 
 
 ### Anshu Patel:
 [Github](https://github.com/Litwix)
