@@ -6,21 +6,21 @@ import { Badge } from '@material-ui/core';
 import { fetchItems } from '../store/order';
 
 class Navbar extends React.Component {
-  componentDidMount() {
-    ///used class component to update the badge icon using material UI
-    const audio = document.getElementsByClassName('audio-element')[0];
+  componentDidMount() { ///used class component to update the badge icon using material UI
+    const audio = document.getElementsByClassName('audio-element')[0]
     // audio.play()
-    this.props.fetchItems(); ///when it fetches the items, it updates the order state on (line 50)
-  } ///then we can get the length of the order to update how many unique items are in the cart (line 37)
-  ///bc of this as soon as a user logs in they have a cart
+    let guestOrderId = window.localStorage.orderId
+    this.props.fetchItems(Number(guestOrderId)); ///when it fetches the items, it updates the order state on (line 50) 
+  }                         ///then we can get the length of the order to update how many unique items are in the cart (line 37)
+                        ///bc of this as soon as a user logs in they have a cart
   render() {
     return (
       <div className="navbar">
         <h1>Pierre's General Store</h1>
-        <p>(Song: Stardew Valley Overture)</p>
-        <audio className="audio-element">
-          <source src="https://vgmsite.com/soundtracks/stardew-valley/jijokidi/01%20-%20Stardew%20Valley%20Overture.mp3"></source>
-        </audio>
+        //<p>(Song: Stardew Valley Overture)</p>
+        {/* <audio className="audio-element">
+          <source src="https://vgmsite.com/soundtracks/stardew-valley/jijokidi/01%20-%20Stardew%20Valley%20Overture.mp3" ></source>
+        </audio>   */}
         <nav>
           <Link to="/" className="navLink">
             Home
@@ -60,7 +60,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchItems: () => dispatch(fetchItems()),
+    fetchItems: (orderId) => dispatch(fetchItems(orderId)),
   };
 };
 
