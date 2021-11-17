@@ -9,6 +9,7 @@ import users from './allUsers';
 import singleUser from './singleUser';
 import order from './order';
 import orderHistory from './orderHistory';
+import address from './address';
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   singleUser,
   order,
   orderHistory,
+  address
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
