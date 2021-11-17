@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { updateItem, removeItem } from '../store/order';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-import { updateItem, removeItem } from '../store/order';
 
 class CartItem extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class CartItem extends React.Component {
 
   handleSubmit(productId, event) {
     event.preventDefault();
-    let guestOrderId = window.localStorage.orderId
+    let guestOrderId = window.localStorage.orderId;
     this.props.updateItem(Number(guestOrderId), productId, this.state.quantity);
   }
 
@@ -29,7 +29,7 @@ class CartItem extends React.Component {
   }
 
   removeHandler(productId) {
-    let guestOrderId = window.localStorage.orderId
+    let guestOrderId = window.localStorage.orderId;
     this.props.removeItem(Number(guestOrderId), productId);
   }
 
@@ -44,7 +44,10 @@ class CartItem extends React.Component {
         <Link to={`/products/${item.productId}`} className="cartItem__name">
           <p>{item.product.name}</p>
         </Link>
-        <p className="cartitem__price"><img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />{item.product.price}g</p>
+        <p className="cartitem__price">
+          <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />
+          {item.product.price}g
+        </p>
         <form
           className="cartItem__select"
           onSubmit={(event) => this.handleSubmit(item.productId, event)}

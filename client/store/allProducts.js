@@ -11,7 +11,7 @@ const setProducts = (products) => {
   };
 };
 
-// THUNKS
+// THUNKS:
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
@@ -23,6 +23,7 @@ export const fetchProducts = () => {
   };
 };
 
+// REDUCER:
 export default function products(state = [], action) {
   switch (action.type) {
     case SET_PRODUCTS:

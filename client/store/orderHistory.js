@@ -18,7 +18,7 @@ const _setOrders = (orders) => {
   };
 };
 
-// THUNKS
+// THUNKS:
 export const fetchOrderHistory = () => {
   return async (dispatch) => {
     try {
@@ -30,7 +30,7 @@ export const fetchOrderHistory = () => {
   };
 };
 
-// REDUCER
+// REDUCER:
 export default function orderHistory(state = [], action) {
   switch (action.type) {
     case SET_ORDERS:

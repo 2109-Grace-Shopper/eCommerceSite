@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import CartItem from './CartItem';
 import { fetchItems, updateItem, removeItem } from '../store/order';
+import CartItem from './CartItem';
 
 class Cart extends React.Component {
   constructor() {
@@ -11,8 +11,8 @@ class Cart extends React.Component {
     this.getCartTotal = this.getCartTotal.bind(this);
   }
 
-  componentDidMount() { //when it loads this happens
-    let guestOrderId = window.localStorage.orderId
+  componentDidMount() {
+    let guestOrderId = window.localStorage.orderId;
     this.props.fetchItems(Number(guestOrderId));
   }
 
@@ -58,9 +58,9 @@ class Cart extends React.Component {
                   <div>
                     <h3>Delete</h3>
                   </div>
-                </div> 
+                </div>
                 {cartItems.map((item) => (
-                  <CartItem key={item.product.id} item={item} /> //attributes of the item available at this.props.item
+                  <CartItem key={item.product.id} item={item} /> // attributes of the item available at this.props.item
                 ))}
               </div>
             )}
@@ -74,7 +74,10 @@ class Cart extends React.Component {
               {cartItems.map((item) => (
                 <div id="cart_subtotal" key={item.product.id}>
                   <p>{item.product.name}</p>
-                  <p><img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />{item.subTotal}g</p>
+                  <p>
+                    <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />
+                    {item.subTotal}g
+                  </p>
                 </div>
               ))}
               <div id="cart_total">
@@ -94,11 +97,11 @@ class Cart extends React.Component {
 }
 
 const mapState = (state) => {
-  return { items: state.order }; //items is available in the component as this.props.items
-};                               //this refers to the state in the order reducer
-                                  //renaming order to items
+  return { items: state.order };
+};
+
 const mapDispatch = (dispatch) => ({
-  fetchItems: (orderId) => dispatch(fetchItems(orderId)), //ties to our thunk in order.js
+  fetchItems: (orderId) => dispatch(fetchItems(orderId)),
 });
 
 export default connect(mapState, mapDispatch)(Cart);

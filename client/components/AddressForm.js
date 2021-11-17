@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid, TextField, Button } from '@mui/material';
 
-const AddressForm = ()=> {
+const AddressForm = () => {
+
   return (
     <form noValidate autoComplete="off" className="shipping_form">
       <Grid container spacing={2}>
@@ -26,7 +27,12 @@ const AddressForm = ()=> {
         <Grid item xs={12} sm={6}>
           <TextField label="Country" variant="outlined" fullWidth />
         </Grid>
-        <Button variant="contained" style={{margin: 'auto', marginTop: '10px'}}>Save</Button>
+        <Button
+          variant="contained"
+          style={{ margin: 'auto', marginTop: '10px' }}
+        >
+          Save
+        </Button>
       </Grid>
     </form>
   );

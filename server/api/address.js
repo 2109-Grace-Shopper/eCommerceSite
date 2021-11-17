@@ -4,15 +4,13 @@ const {
 } = require('../db');
 module.exports = router;
 
-const {isAdminCheck} = require('./isAdmin')
-
 // GET api/address
 router.get('/', async function (req, res, next) {
     try {
         const user = await User.findByToken(req.header.authorization);
         const address = await Address.findOne({
             where: {
-                id: user.id
+                userId: user.id
             }
         })
         res.send(address)
@@ -50,7 +48,6 @@ router.put('./address', async (req, res, next) => {
                 id: user.id
             }
         })
-
         res.send(
             await address.update({
                 email: req.body.email,

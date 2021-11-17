@@ -4,7 +4,19 @@ const {
 } = require('../db');
 module.exports = router;
 
-const {isAdminCheck} = require('./isAdmin')
+const isAdminCheck = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    if (user.isAdmin) {
+      next();
+    } else {
+      throw new Error("Get out of here, Morris! You're not allowed!");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 // GET api/products
 router.get('/', async function (req, res, next) {
@@ -16,7 +28,7 @@ router.get('/', async function (req, res, next) {
   }
 });
 
-// POST api/products ---- WILL NEED ADMIN TOKEN
+// POST api/products ---- NEEDS ADMIN TOKEN
 router.post('/', isAdminCheck, async function (req, res, next) {
   try {
     const product = await Product.create(req.body);
@@ -43,7 +55,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// PUT api/product/:id ---- WILL NEED ADMIN TOKEN
+// PUT api/product/:id ---- NEEDS ADMIN TOKEN
 router.put('/:id', isAdminCheck, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -54,7 +66,7 @@ router.put('/:id', isAdminCheck, async (req, res, next) => {
   }
 });
 
-// DELETE api/product/:id ---- WILL NEED ADMIN TOKEN
+// DELETE api/product/:id ---- NEEDS ADMIN TOKEN
 router.delete('/:id', isAdminCheck, async (req, res, next) => {
   try {
     const id = req.params.id;

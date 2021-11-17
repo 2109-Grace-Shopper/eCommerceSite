@@ -3,10 +3,22 @@ const {
   models: { User },
 } = require('../db');
 module.exports = router;
-const {isAdminCheck} = require('./isAdmin')
 
-//GET all users
-//api/users
+const isAdminCheck = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    if (user.isAdmin) {
+      next();
+    } else {
+      throw new Error("Get out of here, Morris! You're not allowed!");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET api/users ---- NEEDS ADMIN CHECK
 router.get('/', isAdminCheck, async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -29,8 +41,7 @@ router.get('/', isAdminCheck, async (req, res, next) => {
   }
 });
 
-//GET single user
-//api/users/1
+// GET api/users/:userId ---- NEEDS ADMIN TOKEN
 router.get('/:userId', isAdminCheck, async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId);

@@ -1,16 +1,15 @@
 import axios from 'axios';
 
-//ACTION TYPES:
+// ACTION TYPES:
 const ALL_USERS = 'ALL_USERS';
 
-//ACTION CREATORS:
+// ACTION CREATORS:
 const allUsers = (users) => ({
   type: ALL_USERS,
   users,
 });
 
-//THUNK CREATORS:
-//fetch all users
+// THUNKS:
 export const fetchUsers = () => {
   return async (dispatch) => {
     try {
@@ -22,7 +21,7 @@ export const fetchUsers = () => {
   };
 };
 
-//REDUCER:
+// REDUCER:
 export const users = (state = [], action) => {
   switch (action.type) {
     case ALL_USERS:

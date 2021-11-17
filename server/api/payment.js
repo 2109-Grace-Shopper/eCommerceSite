@@ -4,8 +4,6 @@ const {
 } = require('../db');
 module.exports = router;
 
-const {isAdminCheck} = require('./isAdmin')
-
 // GET api/address
 router.get('/', async function (req, res, next) {
     try {
@@ -22,7 +20,7 @@ router.get('/', async function (req, res, next) {
 });
 
 //POST create shipping address associate with user
-router.post('/address', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
 	try {
 		const user = await User.findByToken(req.header.authorization);
         const payment = await Payment.findOrCreate({
@@ -42,7 +40,7 @@ router.post('/address', async (req, res, next) => {
 });
 
 //PUT update address for user(user and admin can both modify it)
-router.put('./address', async (req, res, next) => {
+router.put('./', async (req, res, next) => {
     try{
         const user = await User.findByToken(req.headers.authorization);
         const payment = await Payment.findOne({
