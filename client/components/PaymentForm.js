@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid, TextField, Button, Select, MenuItem} from '@mui/material';
+import { Grid, TextField, Button, Select, MenuItem } from '@mui/material';
 
-const PaymentForm = ()=> {
+const PaymentForm = () => {
   return (
     <form noValidate autoComplete="off" className="shipping_form">
-      <Grid container spacing={2} >
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField label="Name on Card" variant="outlined" fullWidth />
         </Grid>
@@ -22,12 +22,22 @@ const PaymentForm = ()=> {
           <TextField label="CVC" variant="outlined" fullWidth />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField label="Expiration Date" type="date" variant="outlined" fullWidth/>
+          <TextField
+            label="Expiration Date"
+            type="date"
+            variant="outlined"
+            fullWidth
+          />
         </Grid>
-        <Button variant="contained" style={{margin: 'auto', marginTop: '10px'}}>Save</Button>
+        <Button
+          variant="contained"
+          style={{ margin: 'auto', marginTop: '10px' }}
+        >
+          Save
+        </Button>
       </Grid>
     </form>
   );
 };
 
-export default PaymentForm
+export default PaymentForm;

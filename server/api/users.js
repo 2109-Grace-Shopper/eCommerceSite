@@ -18,8 +18,7 @@ const isAdminCheck = async (req, res, next) => {
   }
 };
 
-//GET all users
-//api/users
+// GET api/users ---- NEEDS ADMIN CHECK
 router.get('/', isAdminCheck, async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -42,8 +41,7 @@ router.get('/', isAdminCheck, async (req, res, next) => {
   }
 });
 
-//GET single user
-//api/users/1
+// GET api/users/:userId ---- NEEDS ADMIN TOKEN
 router.get('/:userId', isAdminCheck, async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId);

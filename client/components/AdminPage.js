@@ -1,24 +1,16 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
-/**
- * COMPONENT
- */
-export const AdminPage = props => {
-  const {username} = props
+export const AdminPage = (props) => {
+  const { username } = props;
 
   return (
     <div>
       <h3></h3>
     </div>
-  )
-}
+  );
+};
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  
-}
+const mapState = (state) => {};
 
-export default connect(mapState)(AdminPage)
+export default connect(mapState)(AdminPage);

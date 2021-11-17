@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { me } from './store';
 import Home from './components/Home';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { Login } from './components/Login';
 import { Signup } from './components/SignUp';
 import { Profile } from './components/UserProfilePage';
-import { me } from './store';
 import About from './components/About';
 import Confirm from './components/ConfirmPage';
 import Cart from './components/Cart';
@@ -32,8 +32,8 @@ class Routes extends Component {
           <Route exact path="/products/:productId" component={SingleProduct} />
           <Route path="/profile" component={Profile} />
           <Route exact path="/confirm" component={Confirm} />
-          <Route exact path="/cart" component={Cart}/>
-          <Route exact path="/checkout" component={CheckoutPage}/>
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );
@@ -56,6 +56,5 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
+// The `withRouter` wrapper makes sure that updates are not blocked when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));

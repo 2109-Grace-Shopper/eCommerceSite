@@ -8,54 +8,53 @@ module.exports = router;
 // findOrder -- finds an active order
 async function findOrder(orderId) {
   try {
-    const order = await Order.findOne({ /// find the one specific order that is in the cart and going to return it
+    const order = await Order.findOne({
       where: {
-        id: orderId,  
-        status: 'in cart', ///here we have an ENUM that has in cart, pending or completed
+        id: orderId,
+        status: 'in cart', // one of the ENUMS (others are pending and completed)
       },
     });
-    console.log(order)
     return order;
   } catch (error) {
     console.log(error);
   }
 }
 
-// findOrderLines -- finds all items within a specific order
-async function findOrderLines(orderId) { ///finding the order lines given an order. so now you have a users order and want to find all the products in the order
+// findOrderLines -- finds all items within a specific order using orderId
+async function findOrderLines(orderId) {
   try {
     const products = await OrderLine.findAll({
       where: {
         orderId,
       },
-      include: Product, ///here is where we needed the extra associations bc in order to include or do eager loading it can't be using a through table it has to be direct relationship
-    });                 ///so this will include all the product information and then we return the product
+      include: Product, // Need super associations to do eager loading here (cannot be with a through table, need a direct relationship)
+    });
     return products;
   } catch (error) {
     console.log(error);
   }
 }
 
-// findOneOrderLine -- finds one specific item in a specific order
+// findOneOrderLine -- finds one specific item in a specific order using orderId and productId
 async function findOneOrderLine(orderId, productId) {
   try {
-    const product = await OrderLine.findOne({ /// finding a specific orderline given an orderId and productId
+    const product = await OrderLine.findOne({
       where: {
         orderId,
         productId,
       },
-      include: Product, ///similar here we are using the extra associations
+      include: Product, // Similar here, we need super associations
     });
-    return product; ///then it will return the product
+    return product;
   } catch (error) {
     console.log(error);
   }
 }
 
-// findProduct -- finds a specific product
-async function findProduct(productId) {       /// we are finding the product based on the product id using the findBy primary key and returning the product
+// findProduct -- finds a specific product using the PK
+async function findProduct(productId) {
   try {
-    const product = await Product.findByPk(productId); 
+    const product = await Product.findByPk(productId);
     return product;
   } catch (error) {
     console.log(error);
@@ -63,58 +62,57 @@ async function findProduct(productId) {       /// we are finding the product bas
 }
 
 // ROUTES
-// GET api/guest --- this gets all the items in the order, triggers when guest clicks cart icon
-router.post('/order', async function (req, res, next) {       /// Getting the order and getting all the products in that order
+// POST api/guest/order --- this gets all the items in the order, needs to be POST route since orderId needs to be sent in a body, but function as a GET request
+router.post('/order', async function (req, res, next) {
   try {
-    
-    let order = await Order.findByPk(req.body.orderId);
-     /// find the specific order using the helper function we defined above
+    let order = await Order.findByPk(req.body.orderId); // Finds the order by orderId
     // Finds items in specific order and returns them
-    console.log("this is req.body", req.body)
-    console.log(order)
-    const products = await findOrderLines(order.id);  /// then we find all the products within the order
-    res.send(products);                               /// if an order already exists then it will return all the products within that order and send those back
+    const products = await findOrderLines(order.id);
+    res.send(products);
   } catch (error) {
     next(error);
   }
 });
 
-// POST api/guest --- this creates a new orderLine triggers when guest clicks add to cart
+// POST api/guest --- this creates a new orderLine, triggers when guest clicks 'add to cart'
 router.post('/', async function (req, res, next) {
   try {
-     /// similar here we are finding the order
-    let order = await findOrder(req.body.orderId);                           //
-    if (!order) {                                                   /// if they don't have an order then we are creating one
-      order = await Order.create();      
+    let order = await findOrder(req.body.orderId);
+    if (!order) {
+      // If order doesn't exist, it creates one
+      order = await Order.create();
     }
-              
-    const product_value = await findProduct(req.body.productId);    
-    const subTotal = Number(product_value.price) * Number(req.body.quantity); 
-    let orderLine = await findOneOrderLine(order.id, req.body.productId);   
-    if (!orderLine) {                                   ///then we are finding the particular oderline and if there is not an orderline we are creating one 
-      orderLine = await OrderLine.create({              
+    // Calculates subTotal for an item given its quantity
+    const product_value = await findProduct(req.body.productId);
+    const subTotal = Number(product_value.price) * Number(req.body.quantity);
+
+    let orderLine = await findOneOrderLine(order.id, req.body.productId);
+    if (!orderLine) {
+      // First case creates an orderLine if it can't find one
+      orderLine = await OrderLine.create({
         orderId: order.id,
         productId: req.body.productId,
         quantity: req.body.quantity,
         subTotal: subTotal,
       });
     } else {
-      await orderLine.update({                          /// here we are updating quantity and subtotal instead of creating a new orderline each time
-        quantity: Number(orderLine.quantity) + Number(req.body.quantity), //parsing as a number then adding together
+      // Second case updates an orderline's quantity/subTotal if it already exists
+      await orderLine.update({
+        quantity: Number(orderLine.quantity) + Number(req.body.quantity), // Need to parse them as numbers
         subTotal: subTotal + Number(orderLine.subTotal),
       });
     }
-    const newItem = await findOneOrderLine(order.id, req.body.productId)
-    res.send(newItem);  ///if it 
+    const newItem = await findOneOrderLine(order.id, req.body.productId);
+    res.send(newItem);
   } catch (error) {
     next(error);
   }
 });
 
-// PUT api/order --- this updates an orderLine
+// PUT api/guest --- this updates an orderLine
 router.put('/', async function (req, res, next) {
   try {
-     ///finding the order
+    // Finds user's order by orderId
     const order = await findOrder(req.body.orderId);
     // Calculates subTotal for an item given its quantity
     const product_value = await findProduct(req.body.productId);
@@ -132,20 +130,20 @@ router.put('/', async function (req, res, next) {
   }
 });
 
-// DELETE api/order --- this deletes an orderLine
+// DELETE api/guest --- this deletes an orderLine
 router.delete('/', async function (req, res, next) {
   try {
-    // Finds specific orderLine in guest order and deletes it
+    // Finds specific orderLine in guest order (using order's ID and product's ID) and deletes it
     const order = await findOrder(req.body.orderId);
-    const orderLine = await findOneOrderLine(order.id, req.body.productId); ///finding the one orderline associated with that orderId and productId 
-    await orderLine.destroy();                                              ///and destroying it
-    res.send(orderLine);  ///returning the orderline that we destroyed, this is important bc we need to update it in our store and tell it which orderline to destroy
+    const orderLine = await findOneOrderLine(order.id, req.body.productId);
+    await orderLine.destroy();
+    res.send(orderLine); // Returning destroyed orderline -- this is important b/c we need to update it in our redux store
   } catch (error) {
     next(error);
   }
 });
 
-// PUT api/order/confirm --- this updates order status to 'completed'
+// PUT api/guest/confirm --- this updates order status to 'completed'
 router.put('/confirm', async function (req, res, next) {
   try {
     const order = await findOrder(req.body.orderId);

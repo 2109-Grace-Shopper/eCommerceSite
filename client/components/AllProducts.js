@@ -12,7 +12,6 @@ import {
   InputLabel,
 } from '@mui/material';
 
-
 class AllProducts extends React.Component {
   constructor() {
     super();
@@ -39,15 +38,13 @@ class AllProducts extends React.Component {
   }
 
   handleSubmit(product) {
-    // Will have to change this later after adding cart functionality
-    let guestOrderId = "";
-    if(!window.localStorage.orderId){
-      guestOrderId = 0 
+    let guestOrderId = '';
+    if (!window.localStorage.orderId) {
+      guestOrderId = 0;
     } else {
-      guestOrderId = window.localStorage.orderId
+      guestOrderId = window.localStorage.orderId;
     }
-    this.props.addItem(Number(guestOrderId), product.id, 1); ///adding the item to the cart
-    console.log(`${product.name} (cost ${product.price}g) added to cart`);
+    this.props.addItem(Number(guestOrderId), product.id, 1);
   }
 
   componentDidMount() {
@@ -91,7 +88,11 @@ class AllProducts extends React.Component {
                   </h3>
                 </Link>
                 <img src={product.imageUrl} width="75px" height="75px" />
-                <h3>Price: <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png"/>{product.price}g</h3>
+                <h3>
+                  Price:{' '}
+                  <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />
+                  {product.price}g
+                </h3>
                 <Button
                   variant="contained"
                   sx={{ margin: 2 }}
@@ -110,14 +111,15 @@ class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
-    products: state.products
+    products: state.products,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     fetchProducts: () => dispatch(fetchProducts()),
-    addItem: (orderId, productId, quantity) => dispatch(addItem(orderId, productId, quantity)), ///adding the item to the cart
+    addItem: (orderId, productId, quantity) =>
+      dispatch(addItem(orderId, productId, quantity)),
   };
 };
 
