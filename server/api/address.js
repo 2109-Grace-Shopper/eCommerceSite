@@ -41,15 +41,28 @@ router.post('/', async (req, res, next) => {
 router.post('/guest', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.body.orderId);
-    const address = await Address.create({
-      email: req.body.address.email,
-      street: req.body.address.street,
-      city: req.body.address.city,
-      state: req.body.address.state,
-      zipCode: req.body.address.zipCode,
-    });
-    await order.setAddress(address);
-    res.send(address);
+    if (order.addressId) {
+      const address = await Address.findByPk(order.addressId);
+      res.send(
+        await address.update({
+          email: req.body.address.email,
+          street: req.body.address.street,
+          city: req.body.address.city,
+          state: req.body.address.state,
+          zipCode: req.body.address.zipCode,
+        })
+      );
+    } else {
+      const address = await Address.create({
+        email: req.body.address.email,
+        street: req.body.address.street,
+        city: req.body.address.city,
+        state: req.body.address.state,
+        zipCode: req.body.address.zipCode,
+      });
+      await order.setAddress(address);
+      res.send(address);
+    }
   } catch (error) {
     next(error);
   }
@@ -85,11 +98,11 @@ router.put('/guest', async (req, res, next) => {
     const address = await order.getAddress();
     res.send(
       await address.update({
-        email: req.body.email,
-        street: req.body.street,
-        city: req.body.city,
-        state: req.body.state,
-        zipCode: req.body.zipCode,
+        email: req.body.address.email,
+        street: req.body.address.street,
+        city: req.body.address.city,
+        state: req.body.address.state,
+        zipCode: req.body.address.zipCode,
       })
     );
   } catch (error) {

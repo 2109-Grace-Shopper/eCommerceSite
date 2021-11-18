@@ -73,7 +73,7 @@ export const updateAddress = (orderId, address) => {
         const { data } = await axios.put('/api/address', address, header);
         dispatch(_updateAddress(data));
       } else {
-        const { data } = await axios.post('/api/address/guest', {
+        const { data } = await axios.put('/api/address/guest', {
           address,
           orderId,
         });

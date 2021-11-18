@@ -41,15 +41,28 @@ router.post('/', async (req, res, next) => {
 router.post('/guest', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.body.orderId);
-    const payment = await Payment.create({
-      type: req.body.payment.type,
-      name: req.body.payment.name,
-      number: req.body.payment.number,
-      cvc: req.body.payment.cvc,
-      expDate: req.body.payment.expDate,
-    });
-    await order.setPayment(payment);
-    res.send(payment);
+    if (order.paymentId) {
+      const payment = await Payment.findByPk(order.paymentId);
+      res.send(
+        await payment.update({
+          type: req.body.payment.type,
+          name: req.body.payment.name,
+          number: req.body.payment.number,
+          cvc: req.body.payment.cvc,
+          expDate: req.body.payment.expDate,
+        })
+      );
+    } else {
+      const payment = await Payment.create({
+        type: req.body.payment.type,
+        name: req.body.payment.name,
+        number: req.body.payment.number,
+        cvc: req.body.payment.cvc,
+        expDate: req.body.payment.expDate,
+      });
+      await order.setPayment(payment);
+      res.send(payment);
+    }
   } catch (error) {
     next(error);
   }
@@ -85,11 +98,11 @@ router.put('/guest', async (req, res, next) => {
     const payment = await order.getPayment();
     res.send(
       await payment.update({
-        type: req.body.type,
-        name: req.body.name,
-        number: req.body.number,
-        cvc: req.body.cvc,
-        expDate: req.body.expDate,
+        type: req.body.payment.type,
+        name: req.body.payment.name,
+        number: req.body.payment.number,
+        cvc: req.body.payment.cvc,
+        expDate: req.body.payment.expDate,
       })
     );
   } catch (error) {
