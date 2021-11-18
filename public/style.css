@@ -30,8 +30,8 @@ body {
   padding: 5px 14px;
 }
 
-.navLink:hover{
-  background-color: #A2D2FF;
+.navLink:hover {
+  background-color: #a2d2ff;
   border-radius: 5px;
   transition: 0.5s ease;
 }
@@ -50,19 +50,18 @@ body {
     padding: 2px 5px;
   }
 
-  .MuiGrid-root h1 p{
+  .MuiGrid-root h1 p {
     font-size: smaller;
   }
 
-  .MuiGrid-root img{
+  .MuiGrid-root img {
     size: 50%;
   }
 
-  .MuiGrid-root{
+  .MuiGrid-root {
     flex-wrap: wrap;
   }
 }
-
 
 label {
   display: block;
@@ -220,7 +219,7 @@ input:focus {
 }
 
 /* Profile page */
-.profile_box{
+.profile_box {
   padding: 2% 10%;
   text-align: center;
   align-content: center;
@@ -243,13 +242,13 @@ input:focus {
   margin: 2px;
 }
 
-.profile_info{
+.profile_info {
   display: grid;
   grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr 1fr 1fr;
   align-items: center;
 }
 
-.profile_info h4{
+.profile_info h4 {
   font-size: 0.875rem;
 }
 
@@ -396,30 +395,30 @@ input:focus {
   opacity: 0.9;
 }
 
-#cart_subtotal{
+#cart_subtotal {
   display: grid;
   grid-template-columns: 4fr 4fr;
   padding: 0;
-  border-bottom: 0
+  border-bottom: 0;
 }
 
-#cart_total{
+#cart_total {
   margin-left: 50%;
 }
 
-#cart_total p{
+#cart_total p {
   padding: 0;
 }
 
-#cart_subtotal p{
+#cart_subtotal p {
   padding: 0 0 0 20px;
 }
 
-#cart_input{
-  width: 100px
+#cart_input {
+  width: 100px;
 }
 
-#cart_title{
+#cart_title {
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -447,22 +446,22 @@ input:focus {
 }
 
 /* checkout page */
-.checkout_page{
+.checkout_page {
   margin: 5% 15%;
 }
 
-.shiping_box{
+.shiping_box {
   padding: 2% 0;
   margin: 2% auto;
 }
 
-.css-mhc70k-MuiGrid-root>.MuiGrid-item{
+.css-mhc70k-MuiGrid-root > .MuiGrid-item {
   padding-left: 0;
 }
 
 /* order history */
 
-.order_history{
+.order_history {
   display: grid;
   grid-template-columns: 1fr 8fr 3fr;
   align-items: start;
@@ -470,29 +469,23 @@ input:focus {
   margin: -7px auto;
 }
 
-.order_number{
+.order_number {
   text-align: left;
 }
 
-.order_total{
+.order_total {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 1em;
   text-align: right;
 }
 
-#history_img{
+#history_img {
   margin: auto;
 }
 
-  
-
- 
-
-
-
-  
-
-  
-
-  
-
+#notFound {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  padding-top: 10vh;
+}

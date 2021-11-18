@@ -31,7 +31,7 @@ const Address = db.define('address', {
     },
   },
   zipCode: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
