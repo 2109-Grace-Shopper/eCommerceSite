@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { clearItems } from '../store/order';
 import AddressForm from './AddressForm';
@@ -10,12 +9,20 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 class CheckoutPage extends React.Component {
   constructor() {
     super();
+    this.state = {
+      allClear: true,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
     let guestOrderId = window.localStorage.orderId;
-    this.props.clearItems(Number(guestOrderId));
+    if (this.props.address.id && this.props.payment.id) {
+      this.setState({ allClear: true });
+      this.props.clearItems(Number(guestOrderId));
+    } else {
+      this.setState({ allClear: false });
+    }
   }
 
   render() {
@@ -34,26 +41,37 @@ class CheckoutPage extends React.Component {
           <h1>Payment Information</h1>
           <PaymentForm />
           <br />
-          <Link to="/confirm">
-            <Button
-              variant="contained"
-              color="primary"
-              endIcon={<ArrowRightAltIcon />}
-              size="large"
-              onClick={this.handleSubmit}
-              style={{ float: 'right' }}
-            >
-              Confirm Order
-            </Button>
-          </Link>
+          <Button
+            variant="contained"
+            color="primary"
+            endIcon={<ArrowRightAltIcon />}
+            size="large"
+            onClick={this.handleSubmit}
+            style={{ float: 'right' }}
+          >
+            Confirm Order
+          </Button>
+          {!this.state.allClear && (
+            <h3>
+              Uh Oh! Something went wrong! Make sure all your information is
+              correct and SAVE it!
+            </h3>
+          )}
         </div>
       </Box>
     );
   }
 }
 
+const mapState = (state) => {
+  return {
+    address: state.address,
+    payment: state.payment,
+  };
+};
+
 const mapDispatch = (dispatch) => ({
   clearItems: (orderId) => dispatch(clearItems(orderId)),
 });
 
-export default connect(null, mapDispatch)(CheckoutPage);
+export default connect(mapState, mapDispatch)(CheckoutPage);

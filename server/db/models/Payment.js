@@ -13,22 +13,22 @@ const Payment = db.define('payment', {
     },
   },
   number: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
-      isCreditCard: true,
+      // isCreditCard: true,
     },
   },
   cvc: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
     },
   },
   expDate: {
-    type: Sequelize.DATEONLY,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from '../history';
 
 const token = window.localStorage.getItem('token');
 const header = {
@@ -160,6 +161,7 @@ export const clearItems = (orderId) => {
         dispatch(_clearItems());
         window.localStorage.setItem('orderId', 0);
       }
+      history.push('/confirm');
     } catch (error) {
       console.log(error);
     }

@@ -12,6 +12,7 @@ import About from './components/About';
 import Confirm from './components/ConfirmPage';
 import Cart from './components/Cart';
 import CheckoutPage from './components/CheckoutPage';
+import NotFound from './components/NotFound';
 
 class Routes extends Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ class Routes extends Component {
           <Route exact path="/confirm" component={Confirm} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout" component={CheckoutPage} />
+          <Route path="/" component={NotFound} />
         </Switch>
       </div>
     );

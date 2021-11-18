@@ -87,7 +87,9 @@ class AllProducts extends React.Component {
                     {product.name}
                   </h3>
                 </Link>
-                <img src={product.imageUrl} width="75px" height="75px" />
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.imageUrl} width="75px" height="75px" />
+                </Link>
                 <h3>
                   Price:{' '}
                   <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" />

@@ -84,11 +84,15 @@ class Cart extends React.Component {
                 <p>Total: {this.getCartTotal(cartItems)}g</p>
               </div>
             </div>
-            <div>
-              <Link to="/checkout">
-                <button>Proceed To Checkout</button>
-              </Link>
-            </div>
+            {cartItems.length === 0 ? (
+              <div />
+            ) : (
+              <div>
+                <Link to="/checkout">
+                  <button>Proceed To Checkout</button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </>

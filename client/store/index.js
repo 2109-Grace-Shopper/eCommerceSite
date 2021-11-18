@@ -10,6 +10,7 @@ import singleUser from './singleUser';
 import order from './order';
 import orderHistory from './orderHistory';
 import address from './address';
+import payment from './payment';
 
 const reducer = combineReducers({
   auth,
@@ -19,7 +20,8 @@ const reducer = combineReducers({
   singleUser,
   order,
   orderHistory,
-  address
+  address,
+  payment,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
