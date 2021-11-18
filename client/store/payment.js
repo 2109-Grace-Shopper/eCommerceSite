@@ -66,11 +66,19 @@ export const addPayment = (orderId, payment) => {
   };
 };
 
-export const updatePayment = (payment) => {
+export const updatePayment = (orderId, payment) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/payment', payment, header);
-      dispatch(_updatePayment(data));
+      if (token) {
+        const { data } = await axios.put('/api/payment', payment, header);
+        dispatch(_updatePayment(data));
+      } else {
+        const { data } = await axios.put('/api/payment/guest', {
+          payment,
+          orderId,
+        });
+        dispatch(_updatePayment(data));
+      }
     } catch (error) {
       console.log(error);
     }

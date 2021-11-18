@@ -55,7 +55,7 @@ router.post('/guest', async (req, res, next) => {
   }
 });
 
-//PUT update address for user(user and admin can both modify it)
+// PUT api/payment --- updates address for logged in user
 router.put('/', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -64,7 +64,25 @@ router.put('/', async (req, res, next) => {
         userId: user.id,
       },
     });
-    console.log('this is our address', address);
+    res.send(
+      await address.update({
+        email: req.body.email,
+        street: req.body.street,
+        city: req.body.city,
+        state: req.body.state,
+        zipCode: req.body.zipCode,
+      })
+    );
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT api/payment/guest --- updates payment for guest user
+router.put('/guest', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.body.orderId);
+    const address = await order.getAddress();
     res.send(
       await address.update({
         email: req.body.email,

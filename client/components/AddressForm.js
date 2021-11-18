@@ -41,7 +41,7 @@ class AddressForm extends React.Component {
     let guestOrderId = window.localStorage.orderId;
     const address = { ...this.state };
     if (this.props.address.id) {
-      this.props.updateAddress(address);
+      this.props.updateAddress(guestOrderId, address);
     } else {
       this.props.addAddress(guestOrderId, address);
     }
@@ -124,7 +124,8 @@ const mapDispatch = (dispatch) => {
   return {
     fetchAddress: () => dispatch(fetchAddress()),
     addAddress: (orderId, address) => dispatch(addAddress(orderId, address)),
-    updateAddress: (address) => dispatch(updateAddress(address)),
+    updateAddress: (orderId, address) =>
+      dispatch(updateAddress(orderId, address)),
   };
 };
 

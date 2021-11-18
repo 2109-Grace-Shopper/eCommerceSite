@@ -66,11 +66,19 @@ export const addAddress = (orderId, address) => {
   };
 };
 
-export const updateAddress = (address) => {
+export const updateAddress = (orderId, address) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('/api/address', address, header);
-      dispatch(_updateAddress(data));
+      if (token) {
+        const { data } = await axios.put('/api/address', address, header);
+        dispatch(_updateAddress(data));
+      } else {
+        const { data } = await axios.post('/api/address/guest', {
+          address,
+          orderId,
+        });
+        dispatch(_updateAddress(data));
+      }
     } catch (error) {
       console.log(error);
     }

@@ -40,9 +40,8 @@ class PaymentForm extends React.Component {
     event.preventDefault();
     let guestOrderId = window.localStorage.orderId;
     const payment = { ...this.state };
-    console.log(payment);
     if (this.props.payment.id) {
-      this.props.updatePayment(payment);
+      this.props.updatePayment(guestOrderId, payment);
     } else {
       this.props.addPayment(guestOrderId, payment);
     }
@@ -130,7 +129,8 @@ const mapDispatch = (dispatch) => {
   return {
     fetchPayment: () => dispatch(fetchPayment()),
     addPayment: (orderId, payment) => dispatch(addPayment(orderId, payment)),
-    updatePayment: (payment) => dispatch(updatePayment(payment)),
+    updatePayment: (orderId, payment) =>
+      dispatch(updatePayment(orderId, payment)),
   };
 };
 
