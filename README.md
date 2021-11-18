@@ -2,6 +2,7 @@
 Stardew Valley’s beloved Shop Owner has expanded to the web. 
 We’ve created a fullstack e-commerce application.
 See the store for yourself at [Pierre’s General Store](https://pierresgeneralstore.herokuapp.com/).
+![](public/pierre.png)
 
 ## Setup:
 ```
