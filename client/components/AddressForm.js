@@ -59,6 +59,7 @@ class AddressForm extends React.Component {
               label="Email"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -69,6 +70,7 @@ class AddressForm extends React.Component {
               label="Street Address"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -79,6 +81,7 @@ class AddressForm extends React.Component {
               label="Postal/Zip Code"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -89,6 +92,7 @@ class AddressForm extends React.Component {
               label="City"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -99,6 +103,7 @@ class AddressForm extends React.Component {
               label="Province/State"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Button

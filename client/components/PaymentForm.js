@@ -59,6 +59,7 @@ class PaymentForm extends React.Component {
               label="Name on Card"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -69,6 +70,7 @@ class PaymentForm extends React.Component {
               label="Type"
               variant="outlined"
               fullWidth
+              required
             >
               <MenuItem value={'Visa'}>Visa</MenuItem>
               <MenuItem value={'MasterCard'}>MasterCard</MenuItem>
@@ -83,6 +85,7 @@ class PaymentForm extends React.Component {
               label="Credit Card No."
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -93,6 +96,7 @@ class PaymentForm extends React.Component {
               label="CVC"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -104,6 +108,7 @@ class PaymentForm extends React.Component {
               type="date"
               variant="outlined"
               fullWidth
+              required
             />
           </Grid>
           <Button
