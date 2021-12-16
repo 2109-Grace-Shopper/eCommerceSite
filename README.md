@@ -16,20 +16,13 @@ npm run start:dev
 
 ## Tech Stack:
  
-#### React: JS library for building user interfaces based on UI components. 
-
-#### Redux: JS library for managing and centralizing application state.
- 
-#### Material-UI: Allowed us to import and use different components to create a user interface in our React applications.
- 
-#### Node.js: Open source server environment.
- 
-#### Express: Back end web application framework for Node.js.
- 
-#### PostgreSQL: Relational database management system.
- 
-#### Heroku: Used to deploy, manage, and scale. 
-
+- React: JS library for building user interfaces based on UI components. 
+- Redux: JS library for managing and centralizing application state.
+- Material-UI: Allowed us to import and use different components to create a user interface in our React applications.
+- Node.js: Open source server environment.
+- Express: Back end web application framework for Node.js.
+- PostgreSQL: Relational database management system.
+- Heroku: Used to deploy, manage, and scale. 
 
 ## Screenshots:
 Home:
